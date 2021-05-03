@@ -1,6 +1,6 @@
 # number_paginator
 
-A paginator to switch between page numbers.
+A Flutter paginator widget for switching between page numbers. 
 
 ## Getting Started
 
