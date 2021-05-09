@@ -40,16 +40,19 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           child: Icon(Icons.chevron_left),
         ),
         Expanded(
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Expanded(
-              child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: _generateButtonList())),
-            ),
-            if (_dotsShouldShow) Text("..."),
-            _buildPageButton(widget.numberPages - 1),
-          ]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ..._generateButtonList(),
+              if (_dotsShouldShow)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.more_horiz, size: 20),
+                ),
+              _buildPageButton(widget.numberPages - 1),
+            ],
+          ),
         ),
         PaginatorButton(
           onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
