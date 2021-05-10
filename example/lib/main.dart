@@ -10,22 +10,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _numPages = 10;
-  List<Widget> _pages;
   int _currentPage = 0;
 
   @override
-  void initState() {
-    super.initState();
-    _pages = List.generate(
+  Widget build(BuildContext context) {
+    var pages = List.generate(
       _numPages,
       (index) => Center(
         child: Text("Page ${index + 1}"),
       ),
     );
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -36,7 +31,7 @@ class _MyAppState extends State<MyApp> {
             Expanded(
               child: Container(
                 color: Theme.of(context).backgroundColor,
-                child: _pages[_currentPage],
+                child: pages[_currentPage],
               ),
             ),
             NumberPaginator(
