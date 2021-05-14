@@ -10,12 +10,19 @@ class PaginatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: onPressed,
-      minWidth: 16,
-      shape: CircleBorder(),
-      color: selected ? Theme.of(context).accentColor : null,
-      child: child,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: TextButton(
+          onPressed: onPressed,
+          style: TextButton.styleFrom(
+            shape: CircleBorder(),
+            backgroundColor: selected ? Theme.of(context).accentColor : null,
+          ),
+          child: child,
+        ),
+      ),
     );
   }
 }

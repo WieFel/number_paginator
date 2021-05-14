@@ -33,32 +33,43 @@ class _NumberPaginatorState extends State<NumberPaginator> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        PaginatorButton(
-          onPressed: _currentPage > 0 ? _prev : null,
-          child: Icon(Icons.chevron_left),
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ..._generateButtonList(),
-              if (_dotsShouldShow)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.more_horiz, size: 20),
-                ),
-              _buildPageButton(widget.numberPages - 1),
-            ],
+    return SizedBox(
+      height: 48,
+      child: Row(
+        children: [
+          PaginatorButton(
+            onPressed: _currentPage > 0 ? _prev : null,
+            child: Icon(Icons.chevron_left),
           ),
-        ),
-        PaginatorButton(
-          onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
-          child: Icon(Icons.chevron_right),
-        ),
-      ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ..._generateButtonList(),
+                if (_dotsShouldShow)
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      alignment: Alignment.bottomCenter,
+                      child: Icon(
+                        Icons.more_horiz,
+                        color: Theme.of(context).accentColor,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                _buildPageButton(widget.numberPages - 1),
+              ],
+            ),
+          ),
+          PaginatorButton(
+            onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
+            child: Icon(Icons.chevron_right),
+          ),
+        ],
+      ),
     );
   }
 
