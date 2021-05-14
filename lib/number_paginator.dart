@@ -19,11 +19,15 @@ class NumberPaginator extends StatefulWidget {
   /// The height of the number paginator.
   final double height;
 
+  /// The shape of the paginator buttons.
+  final OutlinedBorder buttonShape;
+
   NumberPaginator({
     @required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
     this.height = 48.0,
+    this.buttonShape,
   });
 
   @override
@@ -49,6 +53,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           PaginatorButton(
             onPressed: _currentPage > 0 ? _prev : null,
             child: Icon(Icons.chevron_left),
+            shape: widget.buttonShape,
           ),
           Expanded(
             child: LayoutBuilder(
@@ -81,6 +86,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           PaginatorButton(
             onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
             child: Icon(Icons.chevron_right),
+            shape: widget.buttonShape,
           ),
         ],
       ),
@@ -140,6 +146,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           (index + 1).toString(),
           style: TextStyle(color: _selected(index) ? Colors.white : null),
         ),
+        shape: widget.buttonShape,
       );
 
   /// Checks if the given index is currently selected.

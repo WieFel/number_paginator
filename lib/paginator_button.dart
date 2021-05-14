@@ -4,9 +4,13 @@ class PaginatorButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget child;
   final bool selected;
+  final OutlinedBorder shape;
 
   PaginatorButton(
-      {@required this.onPressed, @required this.child, this.selected = false});
+      {@required this.onPressed,
+      @required this.child,
+      this.selected = false,
+      this.shape});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class PaginatorButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           style: TextButton.styleFrom(
-            shape: CircleBorder(),
+            shape: shape ?? CircleBorder(),
             backgroundColor: selected ? Theme.of(context).accentColor : null,
           ),
           child: child,
