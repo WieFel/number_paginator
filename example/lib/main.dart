@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
               numberPages: _numPages,
               onPageChange: (int index) {
                 setState(() {
-                  _currentPage = index - 1;
+                  _currentPage = index;
                 });
               },
             ),

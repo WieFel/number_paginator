@@ -6,16 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:number_paginator/paginator_button.dart';
 
 class NumberPaginator extends StatefulWidget {
+  /// Total number of pages that should be shown.
   final int numberPages;
+
+  /// Index of initially selected page.
   final int initialPage;
+
+  /// This function is called when the user switches between pages. The received
+  /// parameter indicates the selected index, starting from 0.
   final Function(int) onPageChange;
-  final int pageOptionsShown;
+
+  /// The height of the number paginator.
+  final double height;
 
   NumberPaginator({
     @required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
-    this.pageOptionsShown = 5,
+    this.height = 48.0,
   });
 
   @override
@@ -24,6 +32,7 @@ class NumberPaginator extends StatefulWidget {
 
 class _NumberPaginatorState extends State<NumberPaginator> {
   int _currentPage;
+  int _availableSpots = 0;
 
   @override
   void initState() {
@@ -34,7 +43,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48,
+      height: widget.height,
       child: Row(
         children: [
           PaginatorButton(
@@ -42,26 +51,31 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             child: Icon(Icons.chevron_left),
           ),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ..._generateButtonList(),
-                if (_dotsShouldShow)
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      alignment: Alignment.bottomCenter,
-                      child: Icon(
-                        Icons.more_horiz,
-                        color: Theme.of(context).accentColor,
-                        size: 20,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                _availableSpots = (constraints.maxWidth / _buttonWidth).floor();
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ..._generateButtonList(),
+                    if (_dotsShouldShow)
+                      AspectRatio(
+                        aspectRatio: 1,
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          alignment: Alignment.bottomCenter,
+                          child: Icon(
+                            Icons.more_horiz,
+                            color: Theme.of(context).accentColor,
+                            size: 20,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                _buildPageButton(widget.numberPages - 1),
-              ],
+                    _buildPageButton(widget.numberPages - 1),
+                  ],
+                );
+              },
             ),
           ),
           PaginatorButton(
@@ -73,41 +87,53 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     );
   }
 
+  /// Buttons have an aspect ratio of 1:1. Therefore use paginator height as
+  /// button width.
+  get _buttonWidth => widget.height;
+
   _prev() {
     setState(() {
       _currentPage--;
     });
-    widget.onPageChange?.call(_currentPage + 1);
+    widget.onPageChange?.call(_currentPage);
   }
 
   _next() {
     setState(() {
       _currentPage++;
     });
-    widget.onPageChange?.call(_currentPage + 1);
+    widget.onPageChange?.call(_currentPage);
   }
 
+  /// Checks if pages don't fit in available spots and dots have to be shown.
   bool get _dotsShouldShow =>
-      _currentPage < widget.numberPages - 1 - widget.pageOptionsShown ~/ 2 - 1;
+      _availableSpots < widget.numberPages &&
+      _currentPage < widget.numberPages - _availableSpots ~/ 2 - 1;
 
+  /// Generates the variable button list which is on the left of the (optional)
+  /// dots. The very last page is shown independently of this list.
   List<Widget> _generateButtonList() {
+    // if dots shown: available minus one for last page + one for dots
+    var shownPages =
+        _dotsShouldShow ? _availableSpots - 2 : _availableSpots - 1;
+
     int minValue, maxValue;
-    minValue = max(0, _currentPage - widget.pageOptionsShown ~/ 2);
-    maxValue = min(minValue + widget.pageOptionsShown, widget.numberPages - 1);
-    if (maxValue - minValue < widget.pageOptionsShown)
-      minValue =
-          (maxValue - widget.pageOptionsShown).clamp(0, widget.numberPages - 1);
+    minValue = max(0, _currentPage - shownPages ~/ 2);
+    maxValue = min(minValue + shownPages, widget.numberPages - 1);
+    if (maxValue - minValue < shownPages)
+      minValue = (maxValue - shownPages).clamp(0, widget.numberPages - 1);
 
     return List.generate(
         maxValue - minValue, (index) => _buildPageButton(minValue + index));
   }
 
+  /// Builds a button for the given index.
   _buildPageButton(index) => PaginatorButton(
         onPressed: () {
           setState(() {
             _currentPage = index;
           });
-          widget.onPageChange?.call(index + 1);
+          widget.onPageChange?.call(index);
         },
         selected: _selected(index),
         child: Text(
@@ -116,5 +142,6 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         ),
       );
 
+  /// Checks if the given index is currently selected.
   bool _selected(index) => index == _currentPage;
 }
