@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
     );
 
     return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.orange),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Number Paginator Demo"),
@@ -35,7 +36,6 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             NumberPaginator(
-              pageOptionsShown: 4,
               numberPages: _numPages,
               onPageChange: (int index) {
                 setState(() {
