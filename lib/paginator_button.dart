@@ -5,12 +5,21 @@ class PaginatorButton extends StatelessWidget {
   final Widget child;
   final bool selected;
   final OutlinedBorder shape;
+  final Color selectedBackgroundColor;
+  final Color unSelectedBackgroundColor;
+  final Color selectedForegroundColor;
+  final Color unSelectedforegroundColor;
 
-  PaginatorButton(
-      {@required this.onPressed,
-      @required this.child,
-      this.selected = false,
-      this.shape});
+  PaginatorButton({
+    @required this.onPressed,
+    @required this.child,
+    this.selected = false,
+    this.shape,
+    this.selectedBackgroundColor,
+    this.unSelectedBackgroundColor,
+    this.selectedForegroundColor,
+    this.unSelectedforegroundColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +31,20 @@ class PaginatorButton extends StatelessWidget {
           onPressed: onPressed,
           style: TextButton.styleFrom(
             shape: shape ?? CircleBorder(),
-            backgroundColor: selected ? Theme.of(context).accentColor : null,
+            backgroundColor: _backgroundColor(context, selected),
+            primary: _foregroundColor(context, selected),
           ),
           child: child,
         ),
       ),
     );
   }
+
+  Color _backgroundColor(BuildContext context, bool selected) => selected
+      ? (selectedBackgroundColor ?? Theme.of(context).accentColor)
+      : unSelectedBackgroundColor;
+
+  Color _foregroundColor(BuildContext context, bool selected) => selected
+      ? (selectedForegroundColor ?? Colors.white)
+      : unSelectedforegroundColor;
 }

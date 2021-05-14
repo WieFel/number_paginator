@@ -19,8 +19,28 @@ class NumberPaginator extends StatefulWidget {
   /// The height of the number paginator.
   final double height;
 
-  /// The shape of the paginator buttons.
+  /// The shape of the [PaginatorButton]s.
   final OutlinedBorder buttonShape;
+
+  /// The [PaginatorButton]'s foreground color (text/icon color) when selected.
+  ///
+  /// Defaults to [Colors.white].
+  final Color buttonSelectedForegroundColor;
+
+  /// The [PaginatorButton]'s foreground color (text/icon color) when unselected.
+  ///
+  /// Defaults to `null`.
+  final Color buttonUnselectedForegroundColor;
+
+  /// The [PaginatorButton]'s background color when selected.
+  ///
+  /// Defaults to the [Theme]'s accent color.
+  final Color buttonSelectedBackgroundColor;
+
+  /// The [PaginatorButton]'s background color when unselected.
+  ///
+  /// Defaults to `null`.
+  final Color buttonUnselectedBackgroundColor;
 
   NumberPaginator({
     @required this.numberPages,
@@ -28,6 +48,10 @@ class NumberPaginator extends StatefulWidget {
     this.onPageChange,
     this.height = 48.0,
     this.buttonShape,
+    this.buttonSelectedForegroundColor,
+    this.buttonUnselectedForegroundColor,
+    this.buttonSelectedBackgroundColor,
+    this.buttonUnselectedBackgroundColor,
   });
 
   @override
@@ -54,6 +78,10 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             onPressed: _currentPage > 0 ? _prev : null,
             child: Icon(Icons.chevron_left),
             shape: widget.buttonShape,
+            selectedForegroundColor: widget.buttonSelectedForegroundColor,
+            unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
+            selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
+            unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
           ),
           Expanded(
             child: LayoutBuilder(
@@ -64,19 +92,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ..._generateButtonList(),
-                    if (_dotsShouldShow)
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          alignment: Alignment.bottomCenter,
-                          child: Icon(
-                            Icons.more_horiz,
-                            color: Theme.of(context).accentColor,
-                            size: 20,
-                          ),
-                        ),
-                      ),
+                    if (_dotsShouldShow) _buildDots(),
                     _buildPageButton(widget.numberPages - 1),
                   ],
                 );
@@ -87,6 +103,10 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
             child: Icon(Icons.chevron_right),
             shape: widget.buttonShape,
+            selectedForegroundColor: widget.buttonSelectedForegroundColor,
+            unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
+            selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
+            unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
           ),
         ],
       ),
@@ -144,9 +164,31 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         selected: _selected(index),
         child: Text(
           (index + 1).toString(),
-          style: TextStyle(color: _selected(index) ? Colors.white : null),
         ),
         shape: widget.buttonShape,
+        selectedForegroundColor: widget.buttonSelectedForegroundColor,
+        unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
+        selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
+        unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
+      );
+
+  _buildDots() => AspectRatio(
+        aspectRatio: 1,
+        child: Container(
+          // padding: const EdgeInsets.all(4.0),
+          margin: const EdgeInsets.all(4.0),
+          alignment: Alignment.bottomCenter,
+          decoration: ShapeDecoration(
+            shape: widget.buttonShape ?? CircleBorder(),
+            color: widget.buttonUnselectedBackgroundColor,
+          ),
+          child: Icon(
+            Icons.more_horiz,
+            color: widget.buttonUnselectedForegroundColor ??
+                Theme.of(context).accentColor,
+            size: 20,
+          ),
+        ),
       );
 
   /// Checks if the given index is currently selected.
