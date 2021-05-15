@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
 
 class PaginatorButton extends StatelessWidget {
+  /// Callback for button press.
   final VoidCallback? onPressed;
+
+  /// The child of the button.
   final Widget child;
+
+  /// Whether the button is currently selected.
   final bool selected;
+
+  /// The shape of the button as an [OutlinedBorder].
+  ///
+  /// Defaults to [CircleBorder].
   final OutlinedBorder? shape;
+
+  /// The button's background color when selected.
   final Color? selectedBackgroundColor;
+
+  /// The button's background color when not selected.
   final Color? unSelectedBackgroundColor;
+
+  /// The button's foreground color when selected.
   final Color? selectedForegroundColor;
+
+  /// The button's foreground color when not selected.
   final Color? unSelectedforegroundColor;
 
+  /// Creates an instance of [PaginatorButton].
   PaginatorButton({
     required this.onPressed,
     required this.child,
