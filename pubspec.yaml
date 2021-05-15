@@ -1,5 +1,5 @@
 name: number_paginator
-description: A paginator to switch between page numbers.
+description: A Flutter paginator widget for switching between page numbers.
 version: 0.0.1
 homepage: https://github.com/WieFel/number_paginator
 
