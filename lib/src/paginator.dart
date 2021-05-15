@@ -40,6 +40,7 @@ class NumberPaginator extends StatefulWidget {
   /// Defaults to `null`.
   final Color? buttonUnselectedBackgroundColor;
 
+  /// Creates an instance of [NumberPaginator].
   NumberPaginator({
     required this.numberPages,
     this.initialPage = 0,
@@ -113,7 +114,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
 
   /// Buttons have an aspect ratio of 1:1. Therefore use paginator height as
   /// button width.
-  get _buttonWidth => widget.height;
+  double get _buttonWidth => widget.height;
 
   _prev() {
     setState(() {
@@ -144,15 +145,16 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     int minValue, maxValue;
     minValue = max(0, _currentPage - shownPages ~/ 2);
     maxValue = min(minValue + shownPages, widget.numberPages - 1);
-    if (maxValue - minValue < shownPages)
+    if (maxValue - minValue < shownPages) {
       minValue = (maxValue - shownPages).clamp(0, widget.numberPages - 1);
+    }
 
     return List.generate(
         maxValue - minValue, (index) => _buildPageButton(minValue + index));
   }
 
   /// Builds a button for the given index.
-  _buildPageButton(index) => PaginatorButton(
+  Widget _buildPageButton(int index) => PaginatorButton(
         onPressed: () {
           setState(() {
             _currentPage = index;
@@ -160,9 +162,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           widget.onPageChange?.call(index);
         },
         selected: _selected(index),
-        child: Text(
-          (index + 1).toString(),
-        ),
+        child: Text((index + 1).toString()),
         shape: widget.buttonShape,
         selectedForegroundColor: widget.buttonSelectedForegroundColor,
         unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
@@ -170,7 +170,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
       );
 
-  _buildDots() => AspectRatio(
+  Widget _buildDots() => AspectRatio(
         aspectRatio: 1,
         child: Container(
           // padding: const EdgeInsets.all(4.0),
