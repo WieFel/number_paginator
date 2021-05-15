@@ -1,8 +1,7 @@
 name: number_paginator
 description: A paginator to switch between page numbers.
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/WieFel/number_paginator
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
