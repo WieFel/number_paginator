@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(primarySwatch: Colors.orange),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Number Paginator Demo"),
+          title: Text("Number Paginator Example"),
         ),
         body: Column(
           children: [
