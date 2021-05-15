@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class PaginatorButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
   final bool selected;
-  final OutlinedBorder shape;
-  final Color selectedBackgroundColor;
-  final Color unSelectedBackgroundColor;
-  final Color selectedForegroundColor;
-  final Color unSelectedforegroundColor;
+  final OutlinedBorder? shape;
+  final Color? selectedBackgroundColor;
+  final Color? unSelectedBackgroundColor;
+  final Color? selectedForegroundColor;
+  final Color? unSelectedforegroundColor;
 
   PaginatorButton({
-    @required this.onPressed,
-    @required this.child,
+    required this.onPressed,
+    required this.child,
     this.selected = false,
     this.shape,
     this.selectedBackgroundColor,
@@ -40,11 +40,11 @@ class PaginatorButton extends StatelessWidget {
     );
   }
 
-  Color _backgroundColor(BuildContext context, bool selected) => selected
+  Color? _backgroundColor(BuildContext context, bool selected) => selected
       ? (selectedBackgroundColor ?? Theme.of(context).accentColor)
       : unSelectedBackgroundColor;
 
-  Color _foregroundColor(BuildContext context, bool selected) => selected
+  Color? _foregroundColor(BuildContext context, bool selected) => selected
       ? (selectedForegroundColor ?? Colors.white)
       : unSelectedforegroundColor;
 }

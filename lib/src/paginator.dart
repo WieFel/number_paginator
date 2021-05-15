@@ -12,36 +12,36 @@ class NumberPaginator extends StatefulWidget {
 
   /// This function is called when the user switches between pages. The received
   /// parameter indicates the selected index, starting from 0.
-  final Function(int) onPageChange;
+  final Function(int)? onPageChange;
 
   /// The height of the number paginator.
   final double height;
 
   /// The shape of the [PaginatorButton]s.
-  final OutlinedBorder buttonShape;
+  final OutlinedBorder? buttonShape;
 
   /// The [PaginatorButton]'s foreground color (text/icon color) when selected.
   ///
   /// Defaults to [Colors.white].
-  final Color buttonSelectedForegroundColor;
+  final Color? buttonSelectedForegroundColor;
 
   /// The [PaginatorButton]'s foreground color (text/icon color) when unselected.
   ///
   /// Defaults to `null`.
-  final Color buttonUnselectedForegroundColor;
+  final Color? buttonUnselectedForegroundColor;
 
   /// The [PaginatorButton]'s background color when selected.
   ///
   /// Defaults to the [Theme]'s accent color.
-  final Color buttonSelectedBackgroundColor;
+  final Color? buttonSelectedBackgroundColor;
 
   /// The [PaginatorButton]'s background color when unselected.
   ///
   /// Defaults to `null`.
-  final Color buttonUnselectedBackgroundColor;
+  final Color? buttonUnselectedBackgroundColor;
 
   NumberPaginator({
-    @required this.numberPages,
+    required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
     this.height = 48.0,
@@ -57,7 +57,7 @@ class NumberPaginator extends StatefulWidget {
 }
 
 class _NumberPaginatorState extends State<NumberPaginator> {
-  int _currentPage;
+  late int _currentPage;
   int _availableSpots = 0;
 
   @override
