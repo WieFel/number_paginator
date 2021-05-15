@@ -1,5 +1,7 @@
 # Number Paginator
 
+[![analysis](https://github.com/WieFel/number_paginator/workflows/analysis/badge.svg)](https://github.com/WieFel/number_paginator/actions?query=workflow%3Aanalysis)
+
 A Flutter paginator widget for switching between page numbers. 
 
 <img alt="screenshot1" src="https://user-images.githubusercontent.com/8345062/118354008-480df580-b569-11eb-80f8-4dc89731d614.png" width="30%"/> <img alt="screenshot2" src="https://user-images.githubusercontent.com/8345062/118354019-53f9b780-b569-11eb-937d-9042ba5d26d9.png" width="30%"/> <img alt="screenshot3" src="https://user-images.githubusercontent.com/8345062/118354043-6ffd5900-b569-11eb-9d9a-92585733ab44.png" width="30%"/>
