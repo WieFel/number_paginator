@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/paginator_button.dart';
+import 'package:number_paginator/src/button.dart';
 
 class NumberPaginator extends StatefulWidget {
   /// Total number of pages that should be shown.
