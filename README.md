@@ -54,6 +54,7 @@ NumberPaginator(
 </p>
 
 ## Coming soon...
+- Controller for controlling page switching
 - More customization options
 - Animations
 
