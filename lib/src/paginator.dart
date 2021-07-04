@@ -41,7 +41,8 @@ class NumberPaginator extends StatefulWidget {
   final Color? buttonUnselectedBackgroundColor;
 
   /// Creates an instance of [NumberPaginator].
-  NumberPaginator({
+  const NumberPaginator({
+    Key? key,
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
@@ -51,7 +52,7 @@ class NumberPaginator extends StatefulWidget {
     this.buttonUnselectedForegroundColor,
     this.buttonSelectedBackgroundColor,
     this.buttonUnselectedBackgroundColor,
-  });
+  }) : super(key: key);
 
   @override
   _NumberPaginatorState createState() => _NumberPaginatorState();
@@ -75,7 +76,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         children: [
           PaginatorButton(
             onPressed: _currentPage > 0 ? _prev : null,
-            child: Icon(Icons.chevron_left),
+            child: const Icon(Icons.chevron_left),
             shape: widget.buttonShape,
             selectedForegroundColor: widget.buttonSelectedForegroundColor,
             unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
@@ -100,7 +101,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           ),
           PaginatorButton(
             onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
-            child: Icon(Icons.chevron_right),
+            child: const Icon(Icons.chevron_right),
             shape: widget.buttonShape,
             selectedForegroundColor: widget.buttonSelectedForegroundColor,
             unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
@@ -177,7 +178,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           margin: const EdgeInsets.all(4.0),
           alignment: Alignment.bottomCenter,
           decoration: ShapeDecoration(
-            shape: widget.buttonShape ?? CircleBorder(),
+            shape: widget.buttonShape ?? const CircleBorder(),
             color: widget.buttonUnselectedBackgroundColor,
           ),
           child: Icon(
