@@ -131,6 +131,13 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     widget.onPageChange?.call(_currentPage);
   }
 
+  _navigateToPage(int index) {
+    setState(() {
+      _currentPage = index;
+    });
+    widget.onPageChange?.call(index);
+  }
+
   /// Checks if pages don't fit in available spots and dots have to be shown.
   bool get _dotsShouldShow =>
       _availableSpots < widget.numberPages &&
@@ -156,12 +163,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
 
   /// Builds a button for the given index.
   Widget _buildPageButton(int index) => PaginatorButton(
-        onPressed: () {
-          setState(() {
-            _currentPage = index;
-          });
-          widget.onPageChange?.call(index);
-        },
+        onPressed: () => _navigateToPage(index),
         selected: _selected(index),
         child: Text((index + 1).toString()),
         shape: widget.buttonShape,
