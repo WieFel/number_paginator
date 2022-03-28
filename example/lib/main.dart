@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  int _numPages = 10;
+  final int _numPages = 10;
   int _currentPage = 0;
 
   @override
@@ -25,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(primarySwatch: Colors.orange),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Number Paginator Example"),
+          title: const Text("Number Paginator Example"),
         ),
         body: Column(
           children: [
