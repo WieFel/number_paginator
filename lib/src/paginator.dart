@@ -40,6 +40,19 @@ class NumberPaginator extends StatefulWidget {
   /// Defaults to `null`.
   final Color? buttonUnselectedBackgroundColor;
 
+  /// Flag indicating whether the page numbers should be shown or not. If set to
+  /// `false`, only the prev/next buttons are shown.
+  ///
+  /// Defaults to `true`.
+  final bool showPageNumbers;
+
+  /// The [MainAxisAlignment] of the [Row] that holds the prev/next buttons and
+  /// the page number buttons. This property only takes effect if
+  /// [showPageNumbers] is `false`.
+  ///
+  /// Defaults to [MainAxisAlignment.start].
+  final MainAxisAlignment mainAxisAlignment;
+
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
     Key? key,
@@ -52,6 +65,8 @@ class NumberPaginator extends StatefulWidget {
     this.buttonUnselectedForegroundColor,
     this.buttonSelectedBackgroundColor,
     this.buttonUnselectedBackgroundColor,
+    this.showPageNumbers = true,
+    this.mainAxisAlignment = MainAxisAlignment.start,
   }) : super(key: key);
 
   @override
@@ -73,6 +88,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     return SizedBox(
       height: widget.height,
       child: Row(
+        mainAxisAlignment: widget.mainAxisAlignment,
         children: [
           PaginatorButton(
             onPressed: _currentPage > 0 ? _prev : null,
@@ -83,22 +99,24 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
             unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
           ),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                _availableSpots = (constraints.maxWidth / _buttonWidth).floor();
+          if (widget.showPageNumbers)
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  _availableSpots =
+                      (constraints.maxWidth / _buttonWidth).floor();
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ..._generateButtonList(),
-                    if (_dotsShouldShow) _buildDots(),
-                    _buildPageButton(widget.numberPages - 1),
-                  ],
-                );
-              },
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ..._generateButtonList(),
+                      if (_dotsShouldShow) _buildDots(),
+                      _buildPageButton(widget.numberPages - 1),
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
           PaginatorButton(
             onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
             child: const Icon(Icons.chevron_right),
