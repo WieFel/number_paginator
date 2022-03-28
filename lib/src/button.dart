@@ -60,7 +60,7 @@ class PaginatorButton extends StatelessWidget {
   }
 
   Color? _backgroundColor(BuildContext context, bool selected) => selected
-      ? (selectedBackgroundColor ?? Theme.of(context).accentColor)
+      ? (selectedBackgroundColor ?? Theme.of(context).colorScheme.secondary)
       : unSelectedBackgroundColor;
 
   Color? _foregroundColor(BuildContext context, bool selected) => selected

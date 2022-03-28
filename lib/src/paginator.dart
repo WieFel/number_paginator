@@ -186,7 +186,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           child: Icon(
             Icons.more_horiz,
             color: widget.buttonUnselectedForegroundColor ??
-                Theme.of(context).accentColor,
+                Theme.of(context).colorScheme.secondary,
             size: 20,
           ),
         ),
