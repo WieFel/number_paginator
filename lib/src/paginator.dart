@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/src/button.dart';
 
@@ -183,7 +184,8 @@ class _NumberPaginatorState extends State<NumberPaginator> {
   Widget _buildPageButton(int index) => PaginatorButton(
         onPressed: () => _navigateToPage(index),
         selected: _selected(index),
-        child: Text((index + 1).toString()),
+        child:
+            AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 5),
         shape: widget.buttonShape,
         selectedForegroundColor: widget.buttonSelectedForegroundColor,
         unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
