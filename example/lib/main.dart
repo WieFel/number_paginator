@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
             ),
             NumberPaginator(
               numberPages: _numPages,
+
               onPageChange: (int index) {
                 setState(() {
                   _currentPage = index;
