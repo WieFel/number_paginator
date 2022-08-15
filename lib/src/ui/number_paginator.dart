@@ -5,6 +5,7 @@ import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart'
 import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
 
+/// The main widget used for creating a [NumberPaginator].
 class NumberPaginator extends StatefulWidget {
   /// Total number of pages that should be shown.
   final int numberPages;
@@ -60,17 +61,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
               onPressed: _currentPage > 0 ? _prev : null,
               child: const Icon(Icons.chevron_left),
             ),
-            if (widget.contentBuilder != null)
-              widget.contentBuilder!(_currentPage),
-            if (widget.contentBuilder == null &&
-                widget.config.mode != ContentDisplayMode.hidden)
-              Expanded(
-                child: PaginatorContent(
-                  currentPage: _currentPage,
-                  numberPages: widget.numberPages,
-                  onPageChange: _navigateToPage,
-                ),
-              ),
+            ..._buildCenterContent(),
             PaginatorButton(
               onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
               child: const Icon(Icons.chevron_right),
@@ -100,5 +91,27 @@ class _NumberPaginatorState extends State<NumberPaginator> {
       _currentPage = index;
     });
     widget.onPageChange?.call(index);
+  }
+
+  List<Widget> _buildCenterContent() {
+    return [
+      if (widget.contentBuilder != null)
+        Container(
+          padding: widget.config.contentPadding,
+          child: widget.contentBuilder!(_currentPage),
+        ),
+      if (widget.contentBuilder == null &&
+          widget.config.mode != ContentDisplayMode.hidden)
+        Expanded(
+          child: Container(
+            padding: widget.config.contentPadding,
+            child: PaginatorContent(
+              currentPage: _currentPage,
+              numberPages: widget.numberPages,
+              onPageChange: _navigateToPage,
+            ),
+          ),
+        )
+    ];
   }
 }

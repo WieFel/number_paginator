@@ -41,6 +41,10 @@ class NumberPaginatorConfig {
   /// Defaults to [MainAxisAlignment.start].
   final MainAxisAlignment mainAxisAlignment;
 
+  /// The [EdgeInsets] that should be used as padding for the number paginator's
+  /// content.
+  final EdgeInsets? contentPadding;
+
   const NumberPaginatorConfig({
     this.height = 48.0,
     this.buttonShape,
@@ -50,5 +54,6 @@ class NumberPaginatorConfig {
     this.buttonUnselectedBackgroundColor,
     this.mode = ContentDisplayMode.numbers,
     this.mainAxisAlignment = MainAxisAlignment.start,
+    this.contentPadding,
   });
 }
