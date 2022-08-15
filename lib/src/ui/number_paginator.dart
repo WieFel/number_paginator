@@ -50,7 +50,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     return InheritedNumberPaginator(
       numberPages: widget.numberPages,
       initialPage: widget.initialPage,
-      onPageChange: widget.onPageChange,
+      onPageChange: _navigateToPage,
       config: widget.config,
       child: SizedBox(
         height: widget.config.height,
@@ -107,8 +107,6 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             padding: widget.config.contentPadding,
             child: PaginatorContent(
               currentPage: _currentPage,
-              numberPages: widget.numberPages,
-              onPageChange: _navigateToPage,
             ),
           ),
         )

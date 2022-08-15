@@ -8,18 +8,9 @@ import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 class NumberContent extends StatelessWidget {
   final int currentPage;
 
-  /// Total number of pages that should be shown.
-  final int numberPages;
-
-  /// This function is called when the user switches between pages. The received
-  /// parameter indicates the selected index, starting from 0.
-  final Function(int)? onPageChange;
-
   const NumberContent({
     Key? key,
     required this.currentPage,
-    required this.numberPages,
-    this.onPageChange,
   }) : super(key: key);
 
   @override
@@ -34,9 +25,10 @@ class NumberContent extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ..._generateButtonList(availableSpots),
-            if (_dotsShouldShow(availableSpots)) _buildDots(context),
-            _buildPageButton(numberPages - 1),
+            ..._generateButtonList(context, availableSpots),
+            if (_dotsShouldShow(context, availableSpots)) _buildDots(context),
+            _buildPageButton(
+                context, InheritedNumberPaginator.of(context).numberPages - 1),
           ],
         );
       },
@@ -45,11 +37,12 @@ class NumberContent extends StatelessWidget {
 
   /// Generates the variable button list which is on the left of the (optional)
   /// dots. The very last page is shown independently of this list.
-  List<Widget> _generateButtonList(int availableSpots) {
+  List<Widget> _generateButtonList(BuildContext context, int availableSpots) {
     // if dots shown: available minus one for last page + one for dots
-    var shownPages = _dotsShouldShow(availableSpots)
+    var shownPages = _dotsShouldShow(context, availableSpots)
         ? availableSpots - 2
         : availableSpots - 1;
+    var numberPages = InheritedNumberPaginator.of(context).numberPages;
 
     int minValue, maxValue;
     minValue = max(0, currentPage - shownPages ~/ 2);
@@ -58,13 +51,14 @@ class NumberContent extends StatelessWidget {
       minValue = (maxValue - shownPages).clamp(0, numberPages - 1);
     }
 
-    return List.generate(
-        maxValue - minValue, (index) => _buildPageButton(minValue + index));
+    return List.generate(maxValue - minValue,
+        (index) => _buildPageButton(context, minValue + index));
   }
 
   /// Builds a button for the given index.
-  Widget _buildPageButton(int index) => PaginatorButton(
-        onPressed: () => onPageChange?.call(index),
+  Widget _buildPageButton(BuildContext context, int index) => PaginatorButton(
+        onPressed: () =>
+            InheritedNumberPaginator.of(context).onPageChange?.call(index),
         selected: _selected(index),
         child:
             AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 5),
@@ -95,9 +89,12 @@ class NumberContent extends StatelessWidget {
       );
 
   /// Checks if pages don't fit in available spots and dots have to be shown.
-  bool _dotsShouldShow(int availableSpots) =>
-      availableSpots < numberPages &&
-      currentPage < numberPages - availableSpots ~/ 2 - 1;
+  bool _dotsShouldShow(BuildContext context, int availableSpots) =>
+      availableSpots < InheritedNumberPaginator.of(context).numberPages &&
+      currentPage <
+          InheritedNumberPaginator.of(context).numberPages -
+              availableSpots ~/ 2 -
+              1;
 
   /// Checks if the given index is currently selected.
   bool _selected(index) => index == currentPage;

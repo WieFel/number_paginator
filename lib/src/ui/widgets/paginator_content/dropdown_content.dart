@@ -4,18 +4,9 @@ import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart'
 class DropDownContent extends StatelessWidget {
   final int currentPage;
 
-  /// Total number of pages that should be shown.
-  final int numberPages;
-
-  /// This function is called when the user switches between pages. The received
-  /// parameter indicates the selected index, starting from 0.
-  final Function(int)? onPageChange;
-
   const DropDownContent({
     Key? key,
     required this.currentPage,
-    required this.numberPages,
-    this.onPageChange,
   }) : super(key: key);
 
   @override
@@ -24,7 +15,7 @@ class DropDownContent extends StatelessWidget {
       isExpanded: true,
       value: currentPage,
       selectedItemBuilder: (context) => List.generate(
-        numberPages,
+        InheritedNumberPaginator.of(context).numberPages,
         (index) => DropdownMenuItem(
           value: index,
           child: Text(
@@ -33,7 +24,7 @@ class DropDownContent extends StatelessWidget {
         ),
       ),
       items: List.generate(
-        numberPages,
+        InheritedNumberPaginator.of(context).numberPages,
         (index) => DropdownMenuItem(
           value: index,
           child: Text(
@@ -49,7 +40,8 @@ class DropDownContent extends StatelessWidget {
           ),
         ),
       ),
-      onChanged: (index) => onPageChange?.call(index ?? 0),
+      onChanged: (index) =>
+          InheritedNumberPaginator.of(context).onPageChange?.call(index ?? 0),
     );
   }
 
