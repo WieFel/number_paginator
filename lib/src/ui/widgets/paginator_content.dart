@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 
 class PaginatorContent extends StatelessWidget {
@@ -14,39 +15,11 @@ class PaginatorContent extends StatelessWidget {
   /// parameter indicates the selected index, starting from 0.
   final Function(int)? onPageChange;
 
-  /// The shape of the [PaginatorButton]s.
-  final OutlinedBorder? buttonShape;
-
-  /// The [PaginatorButton]'s foreground color (text/icon color) when selected.
-  ///
-  /// Defaults to [Colors.white].
-  final Color? buttonSelectedForegroundColor;
-
-  /// The [PaginatorButton]'s foreground color (text/icon color) when unselected.
-  ///
-  /// Defaults to `null`.
-  final Color? buttonUnselectedForegroundColor;
-
-  /// The [PaginatorButton]'s background color when selected.
-  ///
-  /// Defaults to the [Theme]'s accent color.
-  final Color? buttonSelectedBackgroundColor;
-
-  /// The [PaginatorButton]'s background color when unselected.
-  ///
-  /// Defaults to `null`.
-  final Color? buttonUnselectedBackgroundColor;
-
   const PaginatorContent({
     Key? key,
     required this.currentPage,
     required this.numberPages,
     this.onPageChange,
-    this.buttonShape,
-    this.buttonSelectedForegroundColor,
-    this.buttonUnselectedForegroundColor,
-    this.buttonSelectedBackgroundColor,
-    this.buttonUnselectedBackgroundColor,
   }) : super(key: key);
 
   @override
@@ -104,12 +77,17 @@ class PaginatorContent extends StatelessWidget {
           margin: const EdgeInsets.all(4.0),
           alignment: Alignment.bottomCenter,
           decoration: ShapeDecoration(
-            shape: buttonShape ?? const CircleBorder(),
-            color: buttonUnselectedBackgroundColor,
+            shape: InheritedNumberPaginator.of(context).config?.buttonShape ??
+                const CircleBorder(),
+            color: InheritedNumberPaginator.of(context)
+                .config
+                ?.buttonUnselectedBackgroundColor,
           ),
           child: Icon(
             Icons.more_horiz,
-            color: buttonUnselectedForegroundColor ??
+            color: InheritedNumberPaginator.of(context)
+                    .config
+                    ?.buttonUnselectedForegroundColor ??
                 Theme.of(context).colorScheme.secondary,
             size: 20,
           ),
