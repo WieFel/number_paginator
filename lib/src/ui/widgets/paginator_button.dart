@@ -28,7 +28,7 @@ class PaginatorButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           style: TextButton.styleFrom(
-            shape: InheritedNumberPaginator.of(context).config?.buttonShape ??
+            shape: InheritedNumberPaginator.of(context).config.buttonShape ??
                 const CircleBorder(),
             backgroundColor: _backgroundColor(context, selected),
             primary: _foregroundColor(context, selected),
@@ -42,18 +42,18 @@ class PaginatorButton extends StatelessWidget {
   Color? _backgroundColor(BuildContext context, bool selected) => selected
       ? (InheritedNumberPaginator.of(context)
               .config
-              ?.buttonSelectedBackgroundColor ??
+              .buttonSelectedBackgroundColor ??
           Theme.of(context).colorScheme.secondary)
       : InheritedNumberPaginator.of(context)
           .config
-          ?.buttonUnselectedBackgroundColor;
+          .buttonUnselectedBackgroundColor;
 
   Color? _foregroundColor(BuildContext context, bool selected) => selected
       ? (InheritedNumberPaginator.of(context)
               .config
-              ?.buttonSelectedForegroundColor ??
+              .buttonSelectedForegroundColor ??
           Colors.white)
       : InheritedNumberPaginator.of(context)
           .config
-          ?.buttonUnselectedForegroundColor;
+          .buttonUnselectedForegroundColor;
 }

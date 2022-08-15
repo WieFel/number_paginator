@@ -15,14 +15,14 @@ class InheritedNumberPaginator extends InheritedWidget {
   final Function(int)? onPageChange;
 
   /// The UI config for the [NumberPaginator].
-  final NumberPaginatorConfig? config;
+  final NumberPaginatorConfig config;
 
   const InheritedNumberPaginator({
     Key? key,
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
-    this.config,
+    required this.config,
     required Widget child,
   }) : super(key: key, child: child);
 
