@@ -1,8 +1,6 @@
-import 'dart:math';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/src/paginator_button.dart';
+import 'package:number_paginator/src/paginator_content.dart';
 
 class NumberPaginator extends StatefulWidget {
   /// Total number of pages that should be shown.
@@ -76,7 +74,6 @@ class NumberPaginator extends StatefulWidget {
 
 class _NumberPaginatorState extends State<NumberPaginator> {
   late int _currentPage;
-  int _availableSpots = 0;
 
   @override
   void initState() {
@@ -102,20 +99,10 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           ),
           if (widget.showPageNumbers)
             Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  _availableSpots =
-                      (constraints.maxWidth / _buttonWidth).floor();
-
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ..._generateButtonList(),
-                      if (_dotsShouldShow) _buildDots(),
-                      _buildPageButton(widget.numberPages - 1),
-                    ],
-                  );
-                },
+              child: PaginatorContent(
+                currentPage: _currentPage,
+                numberPages: widget.numberPages,
+                onPageChange: _navigateToPage,
               ),
             ),
           PaginatorButton(
@@ -131,10 +118,6 @@ class _NumberPaginatorState extends State<NumberPaginator> {
       ),
     );
   }
-
-  /// Buttons have an aspect ratio of 1:1. Therefore use paginator height as
-  /// button width.
-  double get _buttonWidth => widget.height;
 
   _prev() {
     setState(() {
@@ -156,62 +139,4 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     });
     widget.onPageChange?.call(index);
   }
-
-  /// Checks if pages don't fit in available spots and dots have to be shown.
-  bool get _dotsShouldShow =>
-      _availableSpots < widget.numberPages &&
-      _currentPage < widget.numberPages - _availableSpots ~/ 2 - 1;
-
-  /// Generates the variable button list which is on the left of the (optional)
-  /// dots. The very last page is shown independently of this list.
-  List<Widget> _generateButtonList() {
-    // if dots shown: available minus one for last page + one for dots
-    var shownPages =
-        _dotsShouldShow ? _availableSpots - 2 : _availableSpots - 1;
-
-    int minValue, maxValue;
-    minValue = max(0, _currentPage - shownPages ~/ 2);
-    maxValue = min(minValue + shownPages, widget.numberPages - 1);
-    if (maxValue - minValue < shownPages) {
-      minValue = (maxValue - shownPages).clamp(0, widget.numberPages - 1);
-    }
-
-    return List.generate(
-        maxValue - minValue, (index) => _buildPageButton(minValue + index));
-  }
-
-  /// Builds a button for the given index.
-  Widget _buildPageButton(int index) => PaginatorButton(
-        onPressed: () => _navigateToPage(index),
-        selected: _selected(index),
-        child:
-            AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 5),
-        shape: widget.buttonShape,
-        selectedForegroundColor: widget.buttonSelectedForegroundColor,
-        unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
-        selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
-        unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
-      );
-
-  Widget _buildDots() => AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          // padding: const EdgeInsets.all(4.0),
-          margin: const EdgeInsets.all(4.0),
-          alignment: Alignment.bottomCenter,
-          decoration: ShapeDecoration(
-            shape: widget.buttonShape ?? const CircleBorder(),
-            color: widget.buttonUnselectedBackgroundColor,
-          ),
-          child: Icon(
-            Icons.more_horiz,
-            color: widget.buttonUnselectedForegroundColor ??
-                Theme.of(context).colorScheme.secondary,
-            size: 20,
-          ),
-        ),
-      );
-
-  /// Checks if the given index is currently selected.
-  bool _selected(index) => index == _currentPage;
 }
