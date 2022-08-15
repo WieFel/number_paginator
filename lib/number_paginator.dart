@@ -1,4 +1,4 @@
 library number_paginator;
 
-export 'src/paginator.dart';
-export 'src/button.dart';
+export 'src/number_paginator.dart';
+export 'src/paginator_button.dart';
