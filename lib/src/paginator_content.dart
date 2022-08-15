@@ -95,11 +95,6 @@ class PaginatorContent extends StatelessWidget {
         selected: _selected(index),
         child:
             AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 5),
-        shape: buttonShape,
-        selectedForegroundColor: buttonSelectedForegroundColor,
-        unSelectedforegroundColor: buttonUnselectedForegroundColor,
-        selectedBackgroundColor: buttonSelectedBackgroundColor,
-        unSelectedBackgroundColor: buttonUnselectedBackgroundColor,
       );
 
   Widget _buildDots(BuildContext context) => AspectRatio(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/model/number_paginator_config.dart';
+import 'package:number_paginator/src/inherited_number_paginator.dart';
+import 'package:number_paginator/src/model/config.dart';
 import 'package:number_paginator/src/paginator_button.dart';
 import 'package:number_paginator/src/paginator_content.dart';
 
@@ -41,46 +42,34 @@ class _NumberPaginatorState extends State<NumberPaginator> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.config.height,
-      child: Row(
-        mainAxisAlignment: widget.config.mainAxisAlignment,
-        children: [
-          PaginatorButton(
-            onPressed: _currentPage > 0 ? _prev : null,
-            child: const Icon(Icons.chevron_left),
-            shape: widget.config.buttonShape,
-            selectedForegroundColor:
-                widget.config.buttonSelectedForegroundColor,
-            unSelectedforegroundColor:
-                widget.config.buttonUnselectedForegroundColor,
-            selectedBackgroundColor:
-                widget.config.buttonSelectedBackgroundColor,
-            unSelectedBackgroundColor:
-                widget.config.buttonUnselectedBackgroundColor,
-          ),
-          if (widget.config.showPageNumbers)
-            Expanded(
-              child: PaginatorContent(
-                currentPage: _currentPage,
-                numberPages: widget.numberPages,
-                onPageChange: _navigateToPage,
-              ),
+    return InheritedNumberPaginator(
+      numberPages: widget.numberPages,
+      initialPage: widget.initialPage,
+      onPageChange: widget.onPageChange,
+      config: widget.config,
+      child: SizedBox(
+        height: widget.config.height,
+        child: Row(
+          mainAxisAlignment: widget.config.mainAxisAlignment,
+          children: [
+            PaginatorButton(
+              onPressed: _currentPage > 0 ? _prev : null,
+              child: const Icon(Icons.chevron_left),
             ),
-          PaginatorButton(
-            onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
-            child: const Icon(Icons.chevron_right),
-            shape: widget.config.buttonShape,
-            selectedForegroundColor:
-                widget.config.buttonSelectedForegroundColor,
-            unSelectedforegroundColor:
-                widget.config.buttonUnselectedForegroundColor,
-            selectedBackgroundColor:
-                widget.config.buttonSelectedBackgroundColor,
-            unSelectedBackgroundColor:
-                widget.config.buttonUnselectedBackgroundColor,
-          ),
-        ],
+            if (widget.config.showPageNumbers)
+              Expanded(
+                child: PaginatorContent(
+                  currentPage: _currentPage,
+                  numberPages: widget.numberPages,
+                  onPageChange: _navigateToPage,
+                ),
+              ),
+            PaginatorButton(
+              onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
+              child: const Icon(Icons.chevron_right),
+            ),
+          ],
+        ),
       ),
     );
   }

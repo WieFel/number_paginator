@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:number_paginator/src/inherited_number_paginator.dart';
 
 class PaginatorButton extends StatelessWidget {
   /// Callback for button press.
@@ -10,34 +11,12 @@ class PaginatorButton extends StatelessWidget {
   /// Whether the button is currently selected.
   final bool selected;
 
-  /// The shape of the button as an [OutlinedBorder].
-  ///
-  /// Defaults to [CircleBorder].
-  final OutlinedBorder? shape;
-
-  /// The button's background color when selected.
-  final Color? selectedBackgroundColor;
-
-  /// The button's background color when not selected.
-  final Color? unSelectedBackgroundColor;
-
-  /// The button's foreground color when selected.
-  final Color? selectedForegroundColor;
-
-  /// The button's foreground color when not selected.
-  final Color? unSelectedforegroundColor;
-
   /// Creates an instance of [PaginatorButton].
   const PaginatorButton({
     Key? key,
     required this.onPressed,
     required this.child,
     this.selected = false,
-    this.shape,
-    this.selectedBackgroundColor,
-    this.unSelectedBackgroundColor,
-    this.selectedForegroundColor,
-    this.unSelectedforegroundColor,
   }) : super(key: key);
 
   @override
@@ -49,7 +28,8 @@ class PaginatorButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           style: TextButton.styleFrom(
-            shape: shape ?? const CircleBorder(),
+            shape: InheritedNumberPaginator.of(context).config?.buttonShape ??
+                const CircleBorder(),
             backgroundColor: _backgroundColor(context, selected),
             primary: _foregroundColor(context, selected),
           ),
@@ -60,10 +40,20 @@ class PaginatorButton extends StatelessWidget {
   }
 
   Color? _backgroundColor(BuildContext context, bool selected) => selected
-      ? (selectedBackgroundColor ?? Theme.of(context).colorScheme.secondary)
-      : unSelectedBackgroundColor;
+      ? (InheritedNumberPaginator.of(context)
+              .config
+              ?.buttonSelectedBackgroundColor ??
+          Theme.of(context).colorScheme.secondary)
+      : InheritedNumberPaginator.of(context)
+          .config
+          ?.buttonUnselectedBackgroundColor;
 
   Color? _foregroundColor(BuildContext context, bool selected) => selected
-      ? (selectedForegroundColor ?? Colors.white)
-      : unSelectedforegroundColor;
+      ? (InheritedNumberPaginator.of(context)
+              .config
+              ?.buttonSelectedForegroundColor ??
+          Colors.white)
+      : InheritedNumberPaginator.of(context)
+          .config
+          ?.buttonUnselectedForegroundColor;
 }
