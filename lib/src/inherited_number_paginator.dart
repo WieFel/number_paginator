@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 
+/// [InheritedWidget] for providing information for the children of
+/// [NumberPaginator].
 class InheritedNumberPaginator extends InheritedWidget {
   /// Total number of pages that should be shown.
   final int numberPages;
