@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:number_paginator/src/model/number_paginator_config.dart';
 import 'package:number_paginator/src/paginator_button.dart';
 import 'package:number_paginator/src/paginator_content.dart';
 
@@ -13,44 +14,8 @@ class NumberPaginator extends StatefulWidget {
   /// parameter indicates the selected index, starting from 0.
   final Function(int)? onPageChange;
 
-  /// The height of the number paginator.
-  final double height;
-
-  /// The shape of the [PaginatorButton]s.
-  final OutlinedBorder? buttonShape;
-
-  /// The [PaginatorButton]'s foreground color (text/icon color) when selected.
-  ///
-  /// Defaults to [Colors.white].
-  final Color? buttonSelectedForegroundColor;
-
-  /// The [PaginatorButton]'s foreground color (text/icon color) when unselected.
-  ///
-  /// Defaults to `null`.
-  final Color? buttonUnselectedForegroundColor;
-
-  /// The [PaginatorButton]'s background color when selected.
-  ///
-  /// Defaults to the [Theme]'s accent color.
-  final Color? buttonSelectedBackgroundColor;
-
-  /// The [PaginatorButton]'s background color when unselected.
-  ///
-  /// Defaults to `null`.
-  final Color? buttonUnselectedBackgroundColor;
-
-  /// Flag indicating whether the page numbers should be shown or not. If set to
-  /// `false`, only the prev/next buttons are shown.
-  ///
-  /// Defaults to `true`.
-  final bool showPageNumbers;
-
-  /// The [MainAxisAlignment] of the [Row] that holds the prev/next buttons and
-  /// the page number buttons. This property only takes effect if
-  /// [showPageNumbers] is `false`.
-  ///
-  /// Defaults to [MainAxisAlignment.start].
-  final MainAxisAlignment mainAxisAlignment;
+  /// The UI config for the [NumberPaginator].
+  final NumberPaginatorConfig config;
 
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
@@ -58,14 +23,7 @@ class NumberPaginator extends StatefulWidget {
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
-    this.height = 48.0,
-    this.buttonShape,
-    this.buttonSelectedForegroundColor,
-    this.buttonUnselectedForegroundColor,
-    this.buttonSelectedBackgroundColor,
-    this.buttonUnselectedBackgroundColor,
-    this.showPageNumbers = true,
-    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.config = const NumberPaginatorConfig(),
   }) : super(key: key);
 
   @override
@@ -84,20 +42,24 @@ class _NumberPaginatorState extends State<NumberPaginator> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.height,
+      height: widget.config.height,
       child: Row(
-        mainAxisAlignment: widget.mainAxisAlignment,
+        mainAxisAlignment: widget.config.mainAxisAlignment,
         children: [
           PaginatorButton(
             onPressed: _currentPage > 0 ? _prev : null,
             child: const Icon(Icons.chevron_left),
-            shape: widget.buttonShape,
-            selectedForegroundColor: widget.buttonSelectedForegroundColor,
-            unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
-            selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
-            unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
+            shape: widget.config.buttonShape,
+            selectedForegroundColor:
+                widget.config.buttonSelectedForegroundColor,
+            unSelectedforegroundColor:
+                widget.config.buttonUnselectedForegroundColor,
+            selectedBackgroundColor:
+                widget.config.buttonSelectedBackgroundColor,
+            unSelectedBackgroundColor:
+                widget.config.buttonUnselectedBackgroundColor,
           ),
-          if (widget.showPageNumbers)
+          if (widget.config.showPageNumbers)
             Expanded(
               child: PaginatorContent(
                 currentPage: _currentPage,
@@ -108,11 +70,15 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           PaginatorButton(
             onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
             child: const Icon(Icons.chevron_right),
-            shape: widget.buttonShape,
-            selectedForegroundColor: widget.buttonSelectedForegroundColor,
-            unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
-            selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
-            unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
+            shape: widget.config.buttonShape,
+            selectedForegroundColor:
+                widget.config.buttonSelectedForegroundColor,
+            unSelectedforegroundColor:
+                widget.config.buttonUnselectedForegroundColor,
+            selectedBackgroundColor:
+                widget.config.buttonSelectedBackgroundColor,
+            unSelectedBackgroundColor:
+                widget.config.buttonUnselectedBackgroundColor,
           ),
         ],
       ),
