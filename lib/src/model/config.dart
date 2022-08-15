@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:number_paginator/src/model/display_mode.dart';
 
 /// Holds all the relevant information for the configuration of how the
 /// [NumberPaginator] should look like.
@@ -30,15 +31,12 @@ class NumberPaginatorConfig {
   /// Defaults to `null`.
   final Color? buttonUnselectedBackgroundColor;
 
-  /// Flag indicating whether the page numbers should be shown or not. If set to
-  /// `false`, only the prev/next buttons are shown.
-  ///
-  /// Defaults to `true`.
-  final bool showPageNumbers;
+  /// The [ContentDisplayMode] for the center content of the number paginator.
+  final ContentDisplayMode mode;
 
   /// The [MainAxisAlignment] of the [Row] that holds the prev/next buttons and
-  /// the page number buttons. This property only takes effect if
-  /// [showPageNumbers] is `false`.
+  /// the page number buttons. This property only takes effect [mode] is set to
+  /// [ContentDisplayMode.hidden].
   ///
   /// Defaults to [MainAxisAlignment.start].
   final MainAxisAlignment mainAxisAlignment;
@@ -50,7 +48,7 @@ class NumberPaginatorConfig {
     this.buttonUnselectedForegroundColor,
     this.buttonSelectedBackgroundColor,
     this.buttonUnselectedBackgroundColor,
-    this.showPageNumbers = true,
+    this.mode = ContentDisplayMode.numbers,
     this.mainAxisAlignment = MainAxisAlignment.start,
   });
 }
