@@ -15,7 +15,7 @@ class InheritedNumberPaginator extends InheritedWidget {
   final Function(int)? onPageChange;
 
   /// The UI config for the [NumberPaginator].
-  final NumberPaginatorConfig config;
+  final NumberPaginatorUIConfig config;
 
   const InheritedNumberPaginator({
     Key? key,

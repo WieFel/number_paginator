@@ -4,7 +4,7 @@ import 'package:number_paginator/src/model/display_mode.dart';
 
 /// Holds all the relevant information for the configuration of how the
 /// [NumberPaginator] should look like.
-class NumberPaginatorConfig {
+class NumberPaginatorUIConfig {
   /// The height of the number paginator.
   final double height;
 
@@ -45,7 +45,7 @@ class NumberPaginatorConfig {
   /// content.
   final EdgeInsets? contentPadding;
 
-  const NumberPaginatorConfig({
+  const NumberPaginatorUIConfig({
     this.height = 48.0,
     this.buttonShape,
     this.buttonSelectedForegroundColor,

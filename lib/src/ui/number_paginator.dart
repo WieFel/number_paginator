@@ -18,7 +18,7 @@ class NumberPaginator extends StatefulWidget {
   final Function(int)? onPageChange;
 
   /// The UI config for the [NumberPaginator].
-  final NumberPaginatorConfig config;
+  final NumberPaginatorUIConfig config;
 
   final Function(int currentPage)? contentBuilder;
 
@@ -28,7 +28,7 @@ class NumberPaginator extends StatefulWidget {
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
-    this.config = const NumberPaginatorConfig(),
+    this.config = const NumberPaginatorUIConfig(),
     this.contentBuilder,
   }) : super(key: key);
 
