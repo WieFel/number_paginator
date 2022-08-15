@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/paginator_button.dart';
+import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 
 class PaginatorContent extends StatelessWidget {
   final int currentPage;

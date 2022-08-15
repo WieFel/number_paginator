@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/inherited_number_paginator.dart';
+import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 import 'package:number_paginator/src/model/config.dart';
 import 'package:number_paginator/src/model/display_mode.dart';
-import 'package:number_paginator/src/paginator_button.dart';
-import 'package:number_paginator/src/paginator_content.dart';
+import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
+import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
 
 class NumberPaginator extends StatefulWidget {
   /// Total number of pages that should be shown.
