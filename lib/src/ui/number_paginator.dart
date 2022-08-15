@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 import 'package:number_paginator/src/model/config.dart';
 import 'package:number_paginator/src/model/display_mode.dart';
+import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
 
@@ -19,6 +19,8 @@ class NumberPaginator extends StatefulWidget {
   /// The UI config for the [NumberPaginator].
   final NumberPaginatorConfig config;
 
+  final Function(int currentPage)? contentBuilder;
+
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
     Key? key,
@@ -26,6 +28,7 @@ class NumberPaginator extends StatefulWidget {
     this.initialPage = 0,
     this.onPageChange,
     this.config = const NumberPaginatorConfig(),
+    this.contentBuilder,
   }) : super(key: key);
 
   @override
@@ -57,7 +60,10 @@ class _NumberPaginatorState extends State<NumberPaginator> {
               onPressed: _currentPage > 0 ? _prev : null,
               child: const Icon(Icons.chevron_left),
             ),
-            if (widget.config.mode != ContentDisplayMode.hidden)
+            if (widget.contentBuilder != null)
+              widget.contentBuilder!(_currentPage),
+            if (widget.contentBuilder == null &&
+                widget.config.mode != ContentDisplayMode.hidden)
               Expanded(
                 child: PaginatorContent(
                   currentPage: _currentPage,
