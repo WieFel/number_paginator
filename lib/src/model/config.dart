@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
-import 'package:number_paginator/src/model/display_mode.dart';
 
 /// Holds all the relevant information for the configuration of how the
 /// [NumberPaginator] should look like.
