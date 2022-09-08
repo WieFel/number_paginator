@@ -5,6 +5,8 @@ import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart'
 import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
 
+typedef NumberPaginatorContentBuilder = Widget Function(int index);
+
 /// The main widget used for creating a [NumberPaginator].
 class NumberPaginator extends StatefulWidget {
   /// Total number of pages that should be shown.
@@ -20,7 +22,9 @@ class NumberPaginator extends StatefulWidget {
   /// The UI config for the [NumberPaginator].
   final NumberPaginatorUIConfig config;
 
-  final Function(int currentPage)? contentBuilder;
+  /// A builder for the central content of the paginator. If provided, the
+  /// [config] is ignored.
+  final NumberPaginatorContentBuilder? contentBuilder;
 
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
