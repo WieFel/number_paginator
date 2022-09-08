@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/src/model/config.dart';
 import 'package:number_paginator/src/model/display_mode.dart';
+import 'package:number_paginator/src/ui/controller.dart';
 import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
@@ -26,6 +27,8 @@ class NumberPaginator extends StatefulWidget {
   /// [config] is ignored.
   final NumberPaginatorContentBuilder? contentBuilder;
 
+  final NumberPaginatorController? controller;
+
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
     Key? key,
@@ -34,19 +37,25 @@ class NumberPaginator extends StatefulWidget {
     this.onPageChange,
     this.config = const NumberPaginatorUIConfig(),
     this.contentBuilder,
+    this.controller,
   }) : super(key: key);
 
   @override
-  _NumberPaginatorState createState() => _NumberPaginatorState();
+  NumberPaginatorState createState() => NumberPaginatorState();
 }
 
-class _NumberPaginatorState extends State<NumberPaginator> {
-  late int _currentPage;
+class NumberPaginatorState extends State<NumberPaginator> {
+  late NumberPaginatorController _controller;
 
   @override
   void initState() {
-    _currentPage = widget.initialPage;
     super.initState();
+
+    _controller = widget.controller ?? NumberPaginatorController();
+    _controller.currentPage = widget.initialPage;
+    _controller.addListener(() {
+      widget.onPageChange?.call(_controller.currentPage);
+    });
   }
 
   @override
@@ -54,7 +63,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     return InheritedNumberPaginator(
       numberPages: widget.numberPages,
       initialPage: widget.initialPage,
-      onPageChange: _navigateToPage,
+      onPageChange: _controller.navigateToPage,
       config: widget.config,
       child: SizedBox(
         height: widget.config.height,
@@ -62,12 +71,14 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           mainAxisAlignment: widget.config.mainAxisAlignment,
           children: [
             PaginatorButton(
-              onPressed: _currentPage > 0 ? _prev : null,
+              onPressed: _controller.currentPage > 0 ? _controller.prev : null,
               child: const Icon(Icons.chevron_left),
             ),
             ..._buildCenterContent(),
             PaginatorButton(
-              onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
+              onPressed: _controller.currentPage < widget.numberPages - 1
+                  ? _controller.next
+                  : null,
               child: const Icon(Icons.chevron_right),
             ),
           ],
@@ -76,40 +87,19 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     );
   }
 
-  _prev() {
-    setState(() {
-      _currentPage--;
-    });
-    widget.onPageChange?.call(_currentPage);
-  }
-
-  _next() {
-    setState(() {
-      _currentPage++;
-    });
-    widget.onPageChange?.call(_currentPage);
-  }
-
-  _navigateToPage(int index) {
-    setState(() {
-      _currentPage = index;
-    });
-    widget.onPageChange?.call(index);
-  }
-
   List<Widget> _buildCenterContent() {
     return [
       if (widget.contentBuilder != null)
         Container(
           padding: widget.config.contentPadding,
-          child: widget.contentBuilder!(_currentPage),
+          child: widget.contentBuilder!(_controller.currentPage),
         )
       else if (widget.config.mode != ContentDisplayMode.hidden)
         Expanded(
           child: Container(
             padding: widget.config.contentPadding,
             child: PaginatorContent(
-              currentPage: _currentPage,
+              currentPage: _controller.currentPage,
             ),
           ),
         ),
