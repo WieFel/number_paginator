@@ -17,15 +17,15 @@ class _BuilderPageState extends State<BuilderPage> {
     var pages = List.generate(
       _numPages,
       (index) => Center(
-        child: Text("Page ${index + 1}"),
+        child: Text(
+          "Page ${index + 1}",
+          style: Theme.of(context).textTheme.headline1,
+        ),
       ),
     );
 
     return Scaffold(
-      body: Container(
-        color: Theme.of(context).backgroundColor,
-        child: pages[_currentPage],
-      ),
+      body: pages[_currentPage],
       bottomNavigationBar: NumberPaginator(
         numberPages: _numPages,
         contentBuilder: (index) => Expanded(
