@@ -5,17 +5,17 @@
 
 A Flutter paginator widget for switching between page numbers. 
 
-<img alt="screenshot1" src="https://user-images.githubusercontent.com/8345062/118354008-480df580-b569-11eb-80f8-4dc89731d614.png" width="30%"/> <img alt="screenshot2" src="https://user-images.githubusercontent.com/8345062/118354019-53f9b780-b569-11eb-937d-9042ba5d26d9.png" width="30%"/> <img alt="screenshot3" src="https://user-images.githubusercontent.com/8345062/118354043-6ffd5900-b569-11eb-9d9a-92585733ab44.png" width="30%"/>
+<img alt="screenshot1" src="https://user-images.githubusercontent.com/8345062/189090952-bb8e0069-6933-4ee7-a6a6-d08348bd7f1b.png" width="24%"/> <img alt="screenshot2" src="https://user-images.githubusercontent.com/8345062/189091546-f09ef6b0-2f32-44fa-aad9-7a13e18a4084.png" width="24%"/> <img alt="screenshot3" src="https://user-images.githubusercontent.com/8345062/189092097-bc26a03c-5c3f-441b-b110-14ada43e0c57.png" width="24%"/> <img alt="screenshot3" src="https://user-images.githubusercontent.com/8345062/189092664-9b0d6e56-1fb7-46ff-aa9f-ca9bb9a5a760.png" width="24%"/>
 
 
 ## Getting Started
 
-The **number_paginator** widget allows you to implement pagination with page numbers very easily. If you have a list that is split up into several pages, **number_paginator** can be used to let the user switch between these page numbers.
+The **number_paginator** widget allows you to implement pagination with page numbers very easily. If you have content that is split up into several pages, **number_paginator** can be used to let the user switch between these page numbers.
 The package automatically handles the case where page numbers don't fit on one screen and replaces some of them with three dots.
 
 ## Usage
 
-`NumberPaginator` only requires the number of pages (`numberPages`) to be set. All the rest is handled by the widget automatically. Normally, one also wants to react to page changes using the `onPageChange` callback.
+`NumberPaginator` only requires the number of pages (`numberPages`) to be set. All the rest is handled by the widget automatically. Normally, one also wants to react to page changes using the `onPageChange` callback. By default, `NumberPaginator` displays page numbers as central content of the paginator.
 ```dart
 NumberPaginator(
   numberPages: 10,
@@ -30,32 +30,120 @@ NumberPaginator(
 `NumberPaginator` allows for several customizations.
 ```dart
 NumberPaginator(
+  // by default, the paginator shows numbers as center content
   numberPages: 10,
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index; // _currentPage is a variable within State of StatefulWidget
+    });
+  },
+  // initially selected index
+  initialPage: 4,
+  config: NumberPaginatorUIConfig(
+    // default height is 48
+    height: 64,
+    buttonShape: BeveledRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+    buttonSelectedForegroundColor: Colors.yellow,
+    buttonUnselectedForegroundColor: Colors.white,
+    buttonUnselectedBackgroundColor: Colors.grey,
+    buttonSelectedBackgroundColor: Colors.blueGrey,
+  ),
+)
+```
+<p align="center">
+  <img alt="custom buttons" src="https://user-images.githubusercontent.com/8345062/189089917-05bde1aa-6150-4e1f-bb35-e35a50fafecb.png" width="30%"/>
+</p>
+
+### Content variations
+The new version of `NumberPaginator` allows for further customization of how a user can navigate between pages. It provides three different modes and an additional possibility of complete customization o the content using a `builder`.
+
+#### Hidden (only arrows are visible)
+The user only sees arrows to switch to the previous/next page.
+
+```dart
+NumberPaginator(
+  numberPages: _numPages,
+  // shows only default arrows, no center content of paginator
+  config:
+      const NumberPaginatorUIConfig(mode: ContentDisplayMode.hidden),
   onPageChange: (int index) {
     setState(() {
       _currentPage = index;
     });
   },
-  // initially selected index
-  initialPage: 4,
-  // default height is 48
-  height: 70,
-  buttonShape: BeveledRectangleBorder(
-    borderRadius: BorderRadius.circular(8),
-  ),
-  buttonSelectedForegroundColor: Colors.yellow,
-  buttonUnselectedForegroundColor: Colors.white,
-  buttonUnselectedBackgroundColor: Colors.grey,
-  buttonSelectedBackgroundColor: Colors.blueGrey,
 )
 ```
 <p align="center">
-  <img alt="screenshot4" src="https://user-images.githubusercontent.com/8345062/118354836-4cd4a880-b56d-11eb-8a92-1dfe9c770782.png" width="30%"/>
+  <img alt="screenshot for hidden" src="https://user-images.githubusercontent.com/8345062/189090952-bb8e0069-6933-4ee7-a6a6-d08348bd7f1b.png" width="30%"/>
 </p>
+
+#### Numbers (default)
+The paginator shows numbers for switching to any page number that is visible.
+
+```dart
+NumberPaginator(
+  // by default, the paginator shows numbers as center content
+  numberPages: _numPages,
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index;
+    });
+  },
+)
+```
+<p align="center">
+  <img alt="screenshot with page numbers" src="https://user-images.githubusercontent.com/8345062/189091546-f09ef6b0-2f32-44fa-aad9-7a13e18a4084.png" width="30%"/>
+</p>
+
+
+#### Dropdown
+The paginator shows a dropdown (material widget) for choosing which page to show, along with the prev/next buttons.
+
+```dart
+NumberPaginator(
+  numberPages: _numPages,
+  // shows a dropdown as the center paginator content
+  config: const NumberPaginatorUIConfig(
+      mode: ContentDisplayMode.dropdown),
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index;
+    });
+  },
+)
+```
+<p align="center">
+  <img alt="screenshot with dropdown" src="https://user-images.githubusercontent.com/8345062/189092097-bc26a03c-5c3f-441b-b110-14ada43e0c57.png" width="30%"/>
+</p>
+
+
+#### Builder (for passing any content)
+Using the `contentBuilder` property, you can pass any content that you want that should be displayed as a central part of the paginator. For example, you can pass a custom text:
+
+```dart
+NumberPaginator(
+  numberPages: _numPages,
+  contentBuilder: (index) => Expanded(
+    child: Center(
+      child: Text("Currently selected page: ${index + 1}"),
+    ),
+  ),
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index;
+    });
+  },
+)
+```
+<p align="center">
+  <img alt="screenshot with usage of builder" src="https://user-images.githubusercontent.com/8345062/189092664-9b0d6e56-1fb7-46ff-aa9f-ca9bb9a5a760.png" width="30%"/>
+</p>
+
 
 ## Coming soon...
 - Controller for controlling page switching
-- More customization options
 - Animations
 
 ## Contribute
