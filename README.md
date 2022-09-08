@@ -26,6 +26,35 @@ NumberPaginator(
 )
 ```
 
+### With Controller
+`NumerPaginatorController` allows you to control the `NumberPaginator` from the outside, e.g. with an external button anywhere in your app.
+
+```dart
+// instantiate the controller in your state
+final NumberPaginatorController _controller = NumberPaginatorController();
+
+...
+/// use it within NumberPaginator
+NumberPaginator(
+  controller: _controller,
+  // by default, the paginator shows numbers as center content
+  numberPages: _numPages,
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index;
+    });
+  },
+)
+
+...
+// Use the controller, e.g. within a button, to trigger a page change
+floatingActionButton: FloatingActionButton(
+  onPressed: () => _controller.next(),
+  child: const Icon(Icons.navigate_next),
+)
+
+```
+
 ### Customize
 `NumberPaginator` allows for several customizations.
 ```dart
@@ -141,9 +170,58 @@ NumberPaginator(
   <img alt="screenshot with usage of builder" src="https://user-images.githubusercontent.com/8345062/189092664-9b0d6e56-1fb7-46ff-aa9f-ca9bb9a5a760.png" width="30%"/>
 </p>
 
+### Complete example
+A complete example of a simple page widget with number pagination.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:number_paginator/number_paginator.dart';
+
+class NumbersPage extends StatefulWidget {
+  const NumbersPage({Key? key}) : super(key: key);
+
+  @override
+  _NumbersPageState createState() => _NumbersPageState();
+}
+
+class _NumbersPageState extends State<NumbersPage> {
+  final int _numPages = 10;
+  int _currentPage = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    var pages = List.generate(
+      _numPages,
+      (index) => Center(
+        child: Text(
+          "Page ${index + 1}",
+          style: Theme.of(context).textTheme.headline1,
+        ),
+      ),
+    );
+
+    return Scaffold(
+      body: pages[_currentPage],
+      // card for elevation
+      bottomNavigationBar: Card(
+        margin: EdgeInsets.zero,
+        elevation: 4,
+        child: NumberPaginator(
+          // by default, the paginator shows numbers as center content
+          numberPages: _numPages,
+          onPageChange: (int index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## Coming soon...
-- Controller for controlling page switching
 - Animations
 
 ## Contribute
