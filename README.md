@@ -26,6 +26,35 @@ NumberPaginator(
 )
 ```
 
+### With Controller
+`NumerPaginatorController` allows you to control the `NumberPaginator` from the outside, e.g. with an external button anywhere in your app.
+
+```dart
+// instantiate the controller in your state
+final NumberPaginatorController _controller = NumberPaginatorController();
+
+...
+/// use it within NumberPaginator
+NumberPaginator(
+  controller: _controller,
+  // by default, the paginator shows numbers as center content
+  numberPages: _numPages,
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index;
+    });
+  },
+)
+
+...
+// Use the controller, e.g. within a button, to trigger a page change
+floatingActionButton: FloatingActionButton(
+  onPressed: () => _controller.next(),
+  child: const Icon(Icons.navigate_next),
+)
+
+```
+
 ### Customize
 `NumberPaginator` allows for several customizations.
 ```dart
