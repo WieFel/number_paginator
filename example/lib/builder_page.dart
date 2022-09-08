@@ -26,18 +26,23 @@ class _BuilderPageState extends State<BuilderPage> {
 
     return Scaffold(
       body: pages[_currentPage],
-      bottomNavigationBar: NumberPaginator(
-        numberPages: _numPages,
-        contentBuilder: (index) => Expanded(
-          child: Center(
-            child: Text("Currently selected page: ${index + 1}"),
+      // card for elevation
+      bottomNavigationBar: Card(
+        margin: EdgeInsets.zero,
+        elevation: 4,
+        child: NumberPaginator(
+          numberPages: _numPages,
+          contentBuilder: (index) => Expanded(
+            child: Center(
+              child: Text("Currently selected page: ${index + 1}"),
+            ),
           ),
+          onPageChange: (int index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
         ),
-        onPageChange: (int index) {
-          setState(() {
-            _currentPage = index;
-          });
-        },
       ),
     );
   }

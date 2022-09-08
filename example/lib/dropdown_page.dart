@@ -25,27 +25,21 @@ class _DropdownPageState extends State<DropdownPage> {
     );
 
     return Scaffold(
-        backgroundColor: Colors.green.withOpacity(.1),
         body: pages[_currentPage],
-        // For changing the look of the paginator, wrap it in a `Theme`.
-        // By default, it applies the app's theme.
-        bottomNavigationBar: Theme(
-          data: ThemeData.from(
-              colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)),
-          // card for elevation
-          child: Card(
-            margin: EdgeInsets.zero,
-            child: NumberPaginator(
-              numberPages: _numPages,
-              // shows a dropdown as the center paginator content
-              config: const NumberPaginatorUIConfig(
-                  mode: ContentDisplayMode.dropdown),
-              onPageChange: (int index) {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
-            ),
+        // card for elevation
+        bottomNavigationBar: Card(
+          margin: EdgeInsets.zero,
+          elevation: 4,
+          child: NumberPaginator(
+            numberPages: _numPages,
+            // shows a dropdown as the center paginator content
+            config: const NumberPaginatorUIConfig(
+                mode: ContentDisplayMode.dropdown),
+            onPageChange: (int index) {
+              setState(() {
+                _currentPage = index;
+              });
+            },
           ),
         ));
   }
