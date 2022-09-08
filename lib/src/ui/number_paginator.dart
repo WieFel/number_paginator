@@ -103,9 +103,8 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         Container(
           padding: widget.config.contentPadding,
           child: widget.contentBuilder!(_currentPage),
-        ),
-      if (widget.contentBuilder == null &&
-          widget.config.mode != ContentDisplayMode.hidden)
+        )
+      else if (widget.config.mode != ContentDisplayMode.hidden)
         Expanded(
           child: Container(
             padding: widget.config.contentPadding,
@@ -113,7 +112,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
               currentPage: _currentPage,
             ),
           ),
-        )
+        ),
     ];
   }
 }

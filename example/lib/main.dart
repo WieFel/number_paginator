@@ -1,51 +1,40 @@
+import 'package:example/builder_page.dart';
+import 'package:example/dropdown_page.dart';
+import 'package:example/numbers_page.dart';
+import 'package:example/only_arrows_page.dart';
 import 'package:flutter/material.dart';
-import 'package:number_paginator/number_paginator.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final int _numPages = 10;
-  int _currentPage = 0;
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var pages = List.generate(
-      _numPages,
-      (index) => Center(
-        child: Text("Page ${index + 1}"),
-      ),
-    );
-
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.orange),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Number Paginator Example"),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Container(
-                color: Theme.of(context).backgroundColor,
-                child: pages[_currentPage],
-              ),
+      home: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Number Paginator"),
+            bottom: const TabBar(
+              tabs: [
+                Tab(child: Text("Hidden")),
+                Tab(child: Text("Numbers")),
+                Tab(child: Text("Dropdown")),
+                Tab(child: Text("Custom Builder")),
+              ],
             ),
-            NumberPaginator(
-              numberPages: _numPages,
-              onPageChange: (int index) {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
-            ),
-          ],
+          ),
+          body: const TabBarView(
+            children: [
+              OnlyArrowsPage(),
+              NumbersPage(),
+              DropdownPage(),
+              BuilderPage(),
+            ],
+          ),
         ),
       ),
     );
