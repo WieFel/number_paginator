@@ -1,3 +1,7 @@
+## [0.2.0] - 08.09.2022
+
+- `NumberPaginatorController` for controlling the `NumberPaginator` from the outside
+
 ## [0.1.0] - 08.09.2022
 
 - Upgrades to Flutter 3.3.0
