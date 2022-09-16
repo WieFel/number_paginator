@@ -25,8 +25,12 @@ class NumberContent extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            _buildPageButton(context, 0),
+            if (_frontDotsShouldShow(context, availableSpots))
+              _buildDots(context),
             ..._generateButtonList(context, availableSpots),
-            if (_dotsShouldShow(context, availableSpots)) _buildDots(context),
+            if (_backDotsShouldShow(context, availableSpots))
+              _buildDots(context),
             _buildPageButton(
                 context, InheritedNumberPaginator.of(context).numberPages - 1),
           ],
@@ -35,20 +39,22 @@ class NumberContent extends StatelessWidget {
     );
   }
 
-  /// Generates the variable button list which is on the left of the (optional)
-  /// dots. The very last page is shown independently of this list.
+  /// Generates the variable button list which is at the center of the (optional)
+  /// dots. The very last and first pages are shown independently of this list.
   List<Widget> _generateButtonList(BuildContext context, int availableSpots) {
-    // if dots shown: available minus one for last page + one for dots
-    var shownPages = _dotsShouldShow(context, availableSpots)
-        ? availableSpots - 2
-        : availableSpots - 1;
+    // if dots shown: available minus (2 for first and last pages + 2 for dots)
+    var shownPages = availableSpots -
+        2 -
+        (_backDotsShouldShow(context, availableSpots) ? 1 : 0) -
+        (_frontDotsShouldShow(context, availableSpots) ? 1 : 0);
+
     var numberPages = InheritedNumberPaginator.of(context).numberPages;
 
     int minValue, maxValue;
-    minValue = max(0, currentPage - shownPages ~/ 2);
+    minValue = max(1, currentPage - shownPages ~/ 2);
     maxValue = min(minValue + shownPages, numberPages - 1);
     if (maxValue - minValue < shownPages) {
-      minValue = (maxValue - shownPages).clamp(0, numberPages - 1);
+      minValue = (maxValue - shownPages).clamp(1, numberPages - 1);
     }
 
     return List.generate(maxValue - minValue,
@@ -89,12 +95,16 @@ class NumberContent extends StatelessWidget {
       );
 
   /// Checks if pages don't fit in available spots and dots have to be shown.
-  bool _dotsShouldShow(BuildContext context, int availableSpots) =>
+  bool _backDotsShouldShow(BuildContext context, int availableSpots) =>
       availableSpots < InheritedNumberPaginator.of(context).numberPages &&
       currentPage <
           InheritedNumberPaginator.of(context).numberPages -
               availableSpots ~/ 2 -
               1;
+
+  bool _frontDotsShouldShow(BuildContext context, int availableSpots) =>
+      availableSpots < InheritedNumberPaginator.of(context).numberPages &&
+      currentPage > availableSpots ~/ 2;
 
   /// Checks if the given index is currently selected.
   bool _selected(index) => index == currentPage;

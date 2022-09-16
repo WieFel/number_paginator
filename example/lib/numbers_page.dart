@@ -9,7 +9,7 @@ class NumbersPage extends StatefulWidget {
 }
 
 class _NumbersPageState extends State<NumbersPage> {
-  final int _numPages = 10;
+  final int _numPages = 100;
   int _currentPage = 0;
 
   @override
