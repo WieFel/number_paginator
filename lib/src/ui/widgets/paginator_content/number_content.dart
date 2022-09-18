@@ -99,12 +99,11 @@ class NumberContent extends StatelessWidget {
       availableSpots < InheritedNumberPaginator.of(context).numberPages &&
       currentPage <
           InheritedNumberPaginator.of(context).numberPages -
-              availableSpots ~/ 2 -
-              1;
+              availableSpots ~/ 2;
 
   bool _frontDotsShouldShow(BuildContext context, int availableSpots) =>
       availableSpots < InheritedNumberPaginator.of(context).numberPages &&
-      currentPage > availableSpots ~/ 2;
+      currentPage > availableSpots ~/ 2 - 1;
 
   /// Checks if the given index is currently selected.
   bool _selected(index) => index == currentPage;
