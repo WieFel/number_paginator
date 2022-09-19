@@ -38,7 +38,9 @@ class NumberPaginator extends StatefulWidget {
     this.config = const NumberPaginatorUIConfig(),
     this.contentBuilder,
     this.controller,
-  }) : super(key: key);
+  })  : assert(initialPage >= 0),
+        assert(initialPage <= numberPages - 1),
+        super(key: key);
 
   @override
   NumberPaginatorState createState() => NumberPaginatorState();
