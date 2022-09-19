@@ -1,3 +1,8 @@
+## [0.2.1] - 19.09.2022
+
+- NumberContent: now showing dots for invisible buttons on front and back, maintaining the first
+  and last button always visible.
+
 ## [0.2.0] - 08.09.2022
 
 - `NumberPaginatorController` for controlling the `NumberPaginator` from the outside
@@ -19,7 +24,6 @@
 
 - Project description change
 - Small code improvements
-
 
 ## [0.0.1] - 15.05.2021
 
