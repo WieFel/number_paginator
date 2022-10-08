@@ -1,3 +1,7 @@
+## [unreleased]
+
+- Fixed bug in NumberContent where a page count of 1 was causing errors
+
 ## [0.2.1] - 19.09.2022
 
 - NumberContent: now showing dots for invisible buttons on front and back, maintaining the first
