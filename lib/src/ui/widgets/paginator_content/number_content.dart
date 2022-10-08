@@ -28,11 +28,13 @@ class NumberContent extends StatelessWidget {
             _buildPageButton(context, 0),
             if (_frontDotsShouldShow(context, availableSpots))
               _buildDots(context),
-            ..._generateButtonList(context, availableSpots),
+            if (InheritedNumberPaginator.of(context).numberPages > 1)
+              ..._generateButtonList(context, availableSpots),
             if (_backDotsShouldShow(context, availableSpots))
               _buildDots(context),
-            _buildPageButton(
-                context, InheritedNumberPaginator.of(context).numberPages - 1),
+            if (InheritedNumberPaginator.of(context).numberPages > 1)
+              _buildPageButton(context,
+                  InheritedNumberPaginator.of(context).numberPages - 1),
           ],
         );
       },
