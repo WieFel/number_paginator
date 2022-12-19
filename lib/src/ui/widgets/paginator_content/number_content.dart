@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:number_paginator/src/ui/widgets/buttons/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
-import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 
 class NumberContent extends StatelessWidget {
   final int currentPage;
@@ -76,7 +76,7 @@ class NumberContent extends StatelessWidget {
         aspectRatio: 1,
         child: Container(
           // padding: const EdgeInsets.all(4.0),
-          margin: const EdgeInsets.all(4.0),
+          margin: const EdgeInsets.all(8.0),
           alignment: Alignment.bottomCenter,
           decoration: ShapeDecoration(
             shape: InheritedNumberPaginator.of(context).config.buttonShape ??
@@ -85,13 +85,16 @@ class NumberContent extends StatelessWidget {
                 .config
                 .buttonUnselectedBackgroundColor,
           ),
-          child: Icon(
-            Icons.more_horiz,
-            color: InheritedNumberPaginator.of(context)
-                    .config
-                    .buttonUnselectedForegroundColor ??
-                Theme.of(context).colorScheme.secondary,
-            size: 20,
+          child: AutoSizeText(
+            "...",
+            style: TextStyle(
+              color: InheritedNumberPaginator.of(context)
+                      .config
+                      .buttonUnselectedForegroundColor ??
+                  Theme.of(context).colorScheme.secondary,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       );

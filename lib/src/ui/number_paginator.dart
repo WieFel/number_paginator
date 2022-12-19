@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:number_paginator/src/model/config.dart';
 import 'package:number_paginator/src/model/display_mode.dart';
 import 'package:number_paginator/src/ui/number_paginator_controller.dart';
+import 'package:number_paginator/src/ui/widgets/buttons/paginator_icon_button.dart';
 import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
-import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
 
 typedef NumberPaginatorContentBuilder = Widget Function(int index);
@@ -72,16 +72,16 @@ class NumberPaginatorState extends State<NumberPaginator> {
         child: Row(
           mainAxisAlignment: widget.config.mainAxisAlignment,
           children: [
-            PaginatorButton(
+            PaginatorIconButton(
               onPressed: _controller.currentPage > 0 ? _controller.prev : null,
-              child: const Icon(Icons.chevron_left),
+              icon: Icons.chevron_left,
             ),
             ..._buildCenterContent(),
-            PaginatorButton(
+            PaginatorIconButton(
               onPressed: _controller.currentPage < widget.numberPages - 1
                   ? _controller.next
                   : null,
-              child: const Icon(Icons.chevron_right),
+              icon: Icons.chevron_right,
             ),
           ],
         ),
