@@ -3,7 +3,7 @@ import 'package:number_paginator/src/model/config.dart';
 import 'package:number_paginator/src/model/display_mode.dart';
 import 'package:number_paginator/src/ui/number_paginator_controller.dart';
 import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
-import 'package:number_paginator/src/ui/widgets/paginator_button.dart';
+import 'package:number_paginator/src/ui/widgets/buttons/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
 
 typedef NumberPaginatorContentBuilder = Widget Function(int index);
