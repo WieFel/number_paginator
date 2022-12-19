@@ -1,3 +1,7 @@
+## [0.2.3] - 19.12.2022
+
+- Improved automatic scaling of arrow buttons and "3 dots" in `NumberContent`
+
 ## [0.2.2] - 08.10.2022
 
 - Fixed bug in NumberContent where a page count of 1 was causing errors
