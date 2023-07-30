@@ -5,7 +5,7 @@
 
 A Flutter paginator widget for switching between page numbers. 
 
-<img alt="screenshot1" src="https://user-images.githubusercontent.com/8345062/189090952-bb8e0069-6933-4ee7-a6a6-d08348bd7f1b.png" width="24%"/> <img alt="screenshot2" src="https://user-images.githubusercontent.com/8345062/189091546-f09ef6b0-2f32-44fa-aad9-7a13e18a4084.png" width="24%"/> <img alt="screenshot3" src="https://user-images.githubusercontent.com/8345062/189092097-bc26a03c-5c3f-441b-b110-14ada43e0c57.png" width="24%"/> <img alt="screenshot3" src="https://user-images.githubusercontent.com/8345062/189092664-9b0d6e56-1fb7-46ff-aa9f-ca9bb9a5a760.png" width="24%"/>
+<img alt="screenshot1" src="screenshots/num1.png" width="24%"/> <img alt="screenshot2" src="screenshots/num2.png" width="24%"/> <img alt="screenshot3" src="screenshots/num3.png" width="24%"/> <img alt="screenshot3" src="screenshots/num4.png" width="24%"/>
 
 
 ## Getting Started
@@ -105,7 +105,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot for hidden" src="https://user-images.githubusercontent.com/8345062/189090952-bb8e0069-6933-4ee7-a6a6-d08348bd7f1b.png" width="30%"/>
+  <img alt="screenshot for hidden" src="screenshots/num1.png" width="30%"/>
 </p>
 
 #### Numbers (default)
@@ -123,7 +123,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot with page numbers" src="https://user-images.githubusercontent.com/8345062/189091546-f09ef6b0-2f32-44fa-aad9-7a13e18a4084.png" width="30%"/>
+  <img alt="screenshot with page numbers" src="screenshots/num2.png" width="30%"/>
 </p>
 
 
@@ -144,7 +144,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot with dropdown" src="https://user-images.githubusercontent.com/8345062/189092097-bc26a03c-5c3f-441b-b110-14ada43e0c57.png" width="30%"/>
+  <img alt="screenshot with dropdown" src="screenshots/num3.png" width="30%"/>
 </p>
 
 
@@ -167,7 +167,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot with usage of builder" src="https://user-images.githubusercontent.com/8345062/189092664-9b0d6e56-1fb7-46ff-aa9f-ca9bb9a5a760.png" width="30%"/>
+  <img alt="screenshot with usage of builder" src="screenshots/num4.png" width="30%"/>
 </p>
 
 ### Complete example
