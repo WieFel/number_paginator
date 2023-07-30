@@ -17,8 +17,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+screenshots:
+  - description: 'First variant: hidden numbers, just arrow buttons.'
+    path: screenshots/num1.png
+  - description: 'Second variant: arrow buttons + number buttons.'
+    path: screenshots/num2.png
+  - description: 'Third variant: arrow buttons + dropdown for choosing specific page number.'
+    path: screenshots/num3.png
+  - description: 'Fourth variant: arrow buttons + build any custom view for the central part.'
+    path: screenshots/num4.png
 
 # The following section is specific to Flutter.
 flutter:
