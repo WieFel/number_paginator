@@ -1,3 +1,7 @@
+## [0.3.1] - 30.07.2023
+
+- Correct images in README.md
+
 ## [0.3.0] - 30.07.2023
 
 - Compatibility with Dart 3
