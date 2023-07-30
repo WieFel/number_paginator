@@ -5,7 +5,7 @@
 
 A Flutter paginator widget for switching between page numbers. 
 
-<img alt="screenshot1" src="screenshots/num1.png" width="24%"/> <img alt="screenshot2" src="screenshots/num2.png" width="24%"/> <img alt="screenshot3" src="screenshots/num3.png" width="24%"/> <img alt="screenshot3" src="screenshots/num4.png" width="24%"/>
+<img alt="screenshot1" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num1.png" width="24%"/> <img alt="screenshot2" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num2.png" width="24%"/> <img alt="screenshot3" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num3.png" width="24%"/> <img alt="screenshot3" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num4.png" width="24%"/>
 
 
 ## Getting Started
@@ -105,7 +105,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot for hidden" src="screenshots/num1.png" width="30%"/>
+  <img alt="screenshot for hidden" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num1.png" width="30%"/>
 </p>
 
 #### Numbers (default)
@@ -123,7 +123,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot with page numbers" src="screenshots/num2.png" width="30%"/>
+  <img alt="screenshot with page numbers" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num2.png" width="30%"/>
 </p>
 
 
@@ -144,7 +144,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot with dropdown" src="screenshots/num3.png" width="30%"/>
+  <img alt="screenshot with dropdown" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num3.png" width="30%"/>
 </p>
 
 
@@ -167,7 +167,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="screenshot with usage of builder" src="screenshots/num4.png" width="30%"/>
+  <img alt="screenshot with usage of builder" src="https://github.com/WieFel/number_paginator/blob/main/screenshots/num4.png" width="30%"/>
 </p>
 
 ### Complete example
