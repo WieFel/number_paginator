@@ -34,5 +34,5 @@ class InheritedNumberPaginator extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(InheritedNumberPaginator old) => true;
+  bool updateShouldNotify(InheritedNumberPaginator oldWidget) => true;
 }
