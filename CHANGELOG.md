@@ -1,3 +1,8 @@
+## [0.3.0] - 30.07.2023
+
+- Compatibility with Dart 3
+- Added package screenshots
+
 ## [0.2.3] - 19.12.2022
 
 - Improved automatic scaling of arrow buttons and "3 dots" in `NumberContent`
