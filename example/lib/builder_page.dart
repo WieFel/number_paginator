@@ -19,7 +19,7 @@ class _BuilderPageState extends State<BuilderPage> {
       (index) => Center(
         child: Text(
           "Page ${index + 1}",
-          style: Theme.of(context).textTheme.headline1,
+          style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
     );

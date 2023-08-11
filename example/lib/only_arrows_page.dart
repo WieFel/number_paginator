@@ -19,7 +19,7 @@ class _OnlyArrowsPageState extends State<OnlyArrowsPage> {
       (index) => Center(
         child: Text(
           "Page ${index + 1}",
-          style: Theme.of(context).textTheme.headline1,
+          style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
     );
