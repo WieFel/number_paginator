@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:number_paginator/src/model/config.dart';
 import 'package:number_paginator/src/model/display_mode.dart';
 import 'package:number_paginator/src/ui/number_paginator_controller.dart';
-import 'package:number_paginator/src/ui/widgets/buttons/paginator_icon_button.dart';
+import 'package:number_paginator/src/ui/widgets/buttons/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
 
@@ -29,6 +29,28 @@ class NumberPaginator extends StatefulWidget {
 
   final NumberPaginatorController? controller;
 
+  /// Content of the "previous" button which is automatically displayed and goes
+  /// one page back.
+  ///
+  /// Defaults to:
+  /// ```dart
+  /// const FittedBox(
+  ///   child: Icon(Icons.chevron_left),
+  /// )
+  /// ```
+  final Widget prevButtonContent;
+
+  /// Content of the "next" button which is automatically displayed and goes
+  /// one page forward.
+  ///
+  /// Defaults to:
+  /// ```dart
+  /// const FittedBox(
+  ///   child: Icon(Icons.chevron_right),
+  /// )
+  /// ```
+  final Widget nextButtonContent;
+
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
     Key? key,
@@ -38,6 +60,8 @@ class NumberPaginator extends StatefulWidget {
     this.config = const NumberPaginatorUIConfig(),
     this.contentBuilder,
     this.controller,
+    this.prevButtonContent = const FittedBox(child: Icon(Icons.chevron_left)),
+    this.nextButtonContent = const FittedBox(child: Icon(Icons.chevron_right)),
   })  : assert(initialPage >= 0),
         assert(initialPage <= numberPages - 1),
         super(key: key);
@@ -72,16 +96,16 @@ class NumberPaginatorState extends State<NumberPaginator> {
         child: Row(
           mainAxisAlignment: widget.config.mainAxisAlignment,
           children: [
-            PaginatorIconButton(
+            PaginatorButton(
               onPressed: _controller.currentPage > 0 ? _controller.prev : null,
-              icon: Icons.chevron_left,
+              child: widget.prevButtonContent,
             ),
             ..._buildCenterContent(),
-            PaginatorIconButton(
+            PaginatorButton(
               onPressed: _controller.currentPage < widget.numberPages - 1
                   ? _controller.next
                   : null,
-              icon: Icons.chevron_right,
+              child: widget.nextButtonContent,
             ),
           ],
         ),
