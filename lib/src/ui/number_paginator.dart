@@ -92,6 +92,24 @@ class NumberPaginator extends StatefulWidget {
         assert(initialPage <= numberPages - 1),
         super(key: key);
 
+  const NumberPaginator.noPrevNextButtons({
+    Key? key,
+    required this.numberPages,
+    this.initialPage = 0,
+    this.onPageChange,
+    this.config = const NumberPaginatorUIConfig(),
+    this.contentBuilder,
+    this.controller,
+  })  : showPrevButton = false,
+        showNextButton = false,
+        prevButtonContent = const SizedBox(),
+        nextButtonContent = const SizedBox(),
+        prevButtonBuilder = null,
+        nextButtonBuilder = null,
+        assert(initialPage >= 0),
+        assert(initialPage <= numberPages - 1),
+        super(key: key);
+
   @override
   NumberPaginatorState createState() => NumberPaginatorState();
 }
