@@ -29,6 +29,16 @@ class NumberPaginator extends StatefulWidget {
 
   final NumberPaginatorController? controller;
 
+  /// Whether the "prev" button should be shown.
+  ///
+  /// Defaults to `true`.
+  final bool showPrevButton;
+
+  /// Whether the "next" button should be shown.
+  ///
+  /// Defaults to `true`.
+  final showNextButton;
+
   /// Content of the "previous" button which is automatically displayed and goes
   /// one page back.
   ///
@@ -51,6 +61,18 @@ class NumberPaginator extends StatefulWidget {
   /// ```
   final Widget nextButtonContent;
 
+  /// Builder option for providing a custom "previous" button.
+  ///
+  /// If this is provided, [prevButtonContent] is ignored.
+  /// If [showPrevButton] is `false`, this is ignored.
+  final WidgetBuilder? prevButtonBuilder;
+
+  /// Builder option for providing a custom "next" button.
+  ///
+  /// If this is provided, [nextButtonContent] is ignored.
+  /// If [showNextButton] is `false`, this is ignored.
+  final WidgetBuilder? nextButtonBuilder;
+
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
     Key? key,
@@ -60,8 +82,12 @@ class NumberPaginator extends StatefulWidget {
     this.config = const NumberPaginatorUIConfig(),
     this.contentBuilder,
     this.controller,
-    this.prevButtonContent = const FittedBox(child: Icon(Icons.chevron_left)),
-    this.nextButtonContent = const FittedBox(child: Icon(Icons.chevron_right)),
+    this.showPrevButton = true,
+    this.showNextButton = true,
+    this.prevButtonContent = const Icon(Icons.chevron_left),
+    this.nextButtonContent = const Icon(Icons.chevron_right),
+    this.prevButtonBuilder,
+    this.nextButtonBuilder,
   })  : assert(initialPage >= 0),
         assert(initialPage <= numberPages - 1),
         super(key: key);
@@ -96,17 +122,20 @@ class NumberPaginatorState extends State<NumberPaginator> {
         child: Row(
           mainAxisAlignment: widget.config.mainAxisAlignment,
           children: [
-            PaginatorButton(
-              onPressed: _controller.currentPage > 0 ? _controller.prev : null,
-              child: widget.prevButtonContent,
-            ),
+            if (widget.showPrevButton)
+              widget.prevButtonBuilder?.call(context) ??
+                  PaginatorButton(
+                    onPressed: _controller.currentPage > 0 ? _controller.prev : null,
+                    child: widget.prevButtonContent,
+                  ),
             ..._buildCenterContent(),
-            PaginatorButton(
-              onPressed: _controller.currentPage < widget.numberPages - 1
-                  ? _controller.next
-                  : null,
-              child: widget.nextButtonContent,
-            ),
+            if (widget.showNextButton)
+              widget.nextButtonBuilder?.call(context) ??
+                  PaginatorButton(
+                    onPressed:
+                        _controller.currentPage < widget.numberPages - 1 ? _controller.next : null,
+                    child: widget.nextButtonContent,
+                  ),
           ],
         ),
       ),
