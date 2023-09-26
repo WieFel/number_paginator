@@ -27,6 +27,8 @@ class NumberPaginator extends StatefulWidget {
   /// [config] is ignored.
   final NumberPaginatorContentBuilder? contentBuilder;
 
+  /// The controller for the paginator. Can be used to control the paginator from the outside.
+  /// If not provided, a new controller is created.
   final NumberPaginatorController? controller;
 
   /// Whether the "prev" button should be shown.
@@ -37,7 +39,7 @@ class NumberPaginator extends StatefulWidget {
   /// Whether the "next" button should be shown.
   ///
   /// Defaults to `true`.
-  final showNextButton;
+  final bool showNextButton;
 
   /// Content of the "previous" button which is automatically displayed and goes
   /// one page back.
