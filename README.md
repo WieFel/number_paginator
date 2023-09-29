@@ -126,7 +126,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="custom buttons" src="https://user-images.githubusercontent.com/8345062/189089917-05bde1aa-6150-4e1f-bb35-e35a50fafecb.png" width="30%"/>
+  <img alt="prev/next button customisation" src="https://github.com/WieFel/number_paginator/assets/8345062/fe2dd053-9573-4cb3-b81b-43b22b1a3b38" width="30%"/>
 </p>
 
 ### Content variations
