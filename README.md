@@ -100,6 +100,8 @@ NumberPaginator(
   // show/hide the prev/next buttons
   showPrevButton: true,
   showNextButton: false,  // defaults to true
+  // custom content of the prev/next buttons, maintains their behavior 
+  nextButtonContent: Icon(Icons.arrow_right_alt),
   // custom prev/next buttons using builder (ignored if showPrevButton/showNextButton is false)
   prevButtonBuilder: (context) => TextButton(
     onPressed: _controller.currentPage > 0 ? () => _controller.prev() : null,  // _controller must be passed to NumberPaginator
