@@ -57,6 +57,8 @@ floatingActionButton: FloatingActionButton(
 
 ### Customize
 `NumberPaginator` allows for several customizations.
+
+#### Button look and feel
 ```dart
 NumberPaginator(
   // by default, the paginator shows numbers as center content
@@ -83,6 +85,35 @@ NumberPaginator(
   showPrevButton: false,  // defaults to true
   showNextButton: false,  // defaults to true
   // custom prev/next buttons using builder
+  prevButtonBuilder: (context) => TextButton(
+    onPressed: _controller.currentPage > 0 ? () => _controller.prev() : null,  // _controller must be passed to NumberPaginator
+    child: const Row(
+      children: [
+        Icon(Icons.chevron_left),
+        Text("Previous"),
+      ],
+    ),
+  ),
+)
+```
+<p align="center">
+  <img alt="custom buttons" src="https://user-images.githubusercontent.com/8345062/189089917-05bde1aa-6150-4e1f-bb35-e35a50fafecb.png" width="30%"/>
+</p>
+
+#### Visibility/customisation of prev/next buttons
+```dart
+NumberPaginator(
+  // by default, the paginator shows numbers as center content
+  numberPages: 10,
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index; // _currentPage is a variable within State of StatefulWidget
+    });
+  },
+  // show/hide the prev/next buttons
+  showPrevButton: true,
+  showNextButton: false,  // defaults to true
+  // custom prev/next buttons using builder (ignored if showPrevButton/showNextButton is false)
   prevButtonBuilder: (context) => TextButton(
     onPressed: _controller.currentPage > 0 ? () => _controller.prev() : null,  // _controller must be passed to NumberPaginator
     child: const Row(
