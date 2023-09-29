@@ -1,3 +1,8 @@
+## [0.4.0] - 29.09.2023
+
+- New properties `showNextButton` and `showPrevButton` for showing/hiding the next/prev buttons
+- New way to customize prev/next buttons using `prevButtonBuilder` or `nextButtonBuilder`
+
 ## [0.3.2] - 30.07.2023
 
 - Correct images in README.md
