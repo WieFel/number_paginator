@@ -41,25 +41,19 @@ class NumberPaginator extends StatefulWidget {
   /// Defaults to `true`.
   final bool showNextButton;
 
-  /// Content of the "previous" button which is automatically displayed and goes
-  /// one page back.
+  /// Content of the "previous" button which when pressed goes one page back.
   ///
   /// Defaults to:
   /// ```dart
-  /// const FittedBox(
-  ///   child: Icon(Icons.chevron_left),
-  /// )
+  /// Icon(Icons.chevron_left),
   /// ```
   final Widget prevButtonContent;
 
-  /// Content of the "next" button which is automatically displayed and goes
-  /// one page forward.
+  /// Content of the "next" button which when pressed goes one page forward.
   ///
   /// Defaults to:
   /// ```dart
-  /// const FittedBox(
-  ///   child: Icon(Icons.chevron_right),
-  /// )
+  /// Icon(Icons.chevron_right),
   /// ```
   final Widget nextButtonContent;
 
