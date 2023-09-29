@@ -57,6 +57,8 @@ floatingActionButton: FloatingActionButton(
 
 ### Customize
 `NumberPaginator` allows for several customizations.
+
+#### Button look and feel
 ```dart
 NumberPaginator(
   // by default, the paginator shows numbers as center content
@@ -83,6 +85,37 @@ NumberPaginator(
 ```
 <p align="center">
   <img alt="custom buttons" src="https://user-images.githubusercontent.com/8345062/189089917-05bde1aa-6150-4e1f-bb35-e35a50fafecb.png" width="30%"/>
+</p>
+
+#### Visibility/customisation of prev/next buttons
+```dart
+NumberPaginator(
+  // by default, the paginator shows numbers as center content
+  numberPages: 10,
+  onPageChange: (int index) {
+    setState(() {
+      _currentPage = index; // _currentPage is a variable within State of StatefulWidget
+    });
+  },
+  // show/hide the prev/next buttons
+  showPrevButton: true,
+  showNextButton: false,  // defaults to true
+  // custom content of the prev/next buttons, maintains their behavior 
+  nextButtonContent: Icon(Icons.arrow_right_alt),
+  // custom prev/next buttons using builder (ignored if showPrevButton/showNextButton is false)
+  prevButtonBuilder: (context) => TextButton(
+    onPressed: _controller.currentPage > 0 ? () => _controller.prev() : null,  // _controller must be passed to NumberPaginator
+    child: const Row(
+      children: [
+        Icon(Icons.chevron_left),
+        Text("Previous"),
+      ],
+    ),
+  ),
+)
+```
+<p align="center">
+  <img alt="prev/next button customisation" src="https://github.com/WieFel/number_paginator/assets/8345062/fe2dd053-9573-4cb3-b81b-43b22b1a3b38" width="30%"/>
 </p>
 
 ### Content variations
