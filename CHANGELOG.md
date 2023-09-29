@@ -2,6 +2,7 @@
 
 - New properties `showNextButton` and `showPrevButton` for showing/hiding the next/prev buttons
 - New way to customize prev/next buttons using `prevButtonBuilder` or `nextButtonBuilder`
+- Slight adaptation of margin/padding of "three dots" (only noticeable if it's background is colored)
 
 ## [0.3.2] - 30.07.2023
 
