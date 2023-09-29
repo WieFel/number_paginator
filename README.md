@@ -81,19 +81,6 @@ NumberPaginator(
     buttonUnselectedBackgroundColor: Colors.grey,
     buttonSelectedBackgroundColor: Colors.blueGrey,
   ),
-  // show/hide the prev/next buttons
-  showPrevButton: false,  // defaults to true
-  showNextButton: false,  // defaults to true
-  // custom prev/next buttons using builder
-  prevButtonBuilder: (context) => TextButton(
-    onPressed: _controller.currentPage > 0 ? () => _controller.prev() : null,  // _controller must be passed to NumberPaginator
-    child: const Row(
-      children: [
-        Icon(Icons.chevron_left),
-        Text("Previous"),
-      ],
-    ),
-  ),
 )
 ```
 <p align="center">
