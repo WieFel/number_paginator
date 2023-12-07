@@ -51,6 +51,9 @@ class NumberPaginatorUIConfig {
   /// [buttonUnselectedForegroundColor].
   final TextStyle? buttonTextStyle;
 
+  /// The [Padding] that should be used for the [PaginatorButton]'s content.
+  final EdgeInsetsGeometry? buttonPadding;
+
   const NumberPaginatorUIConfig({
     this.height = 48.0,
     this.buttonShape,
@@ -62,5 +65,6 @@ class NumberPaginatorUIConfig {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.contentPadding,
     this.buttonTextStyle,
+    this.buttonPadding,
   });
 }

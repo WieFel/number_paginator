@@ -33,6 +33,7 @@ class PaginatorButton extends StatelessWidget {
             backgroundColor: _backgroundColor(context, selected),
             foregroundColor: _foregroundColor(context, selected),
             textStyle: config.buttonTextStyle,
+            padding: config.buttonPadding,
           ),
           child: child,
         ),
