@@ -21,6 +21,7 @@ class PaginatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final config = InheritedNumberPaginator.of(context).config;
     return AspectRatio(
       aspectRatio: 1,
       child: Padding(
@@ -28,10 +29,11 @@ class PaginatorButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           style: TextButton.styleFrom(
-            shape: InheritedNumberPaginator.of(context).config.buttonShape ??
-                const CircleBorder(),
+            shape: config.buttonShape ?? const CircleBorder(),
             backgroundColor: _backgroundColor(context, selected),
             foregroundColor: _foregroundColor(context, selected),
+            textStyle: config.buttonTextStyle,
+            padding: config.buttonPadding,
           ),
           child: child,
         ),

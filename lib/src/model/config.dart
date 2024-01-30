@@ -44,6 +44,16 @@ class NumberPaginatorUIConfig {
   /// content.
   final EdgeInsets? contentPadding;
 
+  /// The [TextStyle] that should be used for the [PaginatorButton]'s text.
+  /// This property only takes effect if [mode] is set to
+  /// [ContentDisplayMode.numbers].
+  /// The color of the text is determined by [buttonSelectedForegroundColor] and
+  /// [buttonUnselectedForegroundColor].
+  final TextStyle? buttonTextStyle;
+
+  /// The [Padding] that should be used for the [PaginatorButton]'s content.
+  final EdgeInsetsGeometry? buttonPadding;
+
   const NumberPaginatorUIConfig({
     this.height = 48.0,
     this.buttonShape,
@@ -54,5 +64,7 @@ class NumberPaginatorUIConfig {
     this.mode = ContentDisplayMode.numbers,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.contentPadding,
+    this.buttonTextStyle,
+    this.buttonPadding,
   });
 }
