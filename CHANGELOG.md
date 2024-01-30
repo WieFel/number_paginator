@@ -1,3 +1,7 @@
+## [0.4.1] - 30.01.2024
+
+- New properties `buttonTextStyle` and `buttonPadding` in the `NumberPaginatorUIConfig`
+
 ## [0.4.0] - 29.09.2023
 
 - New properties `showNextButton` and `showPrevButton` for showing/hiding the next/prev buttons
