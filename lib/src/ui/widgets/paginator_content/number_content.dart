@@ -26,12 +26,15 @@ class NumberContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildPageButton(context, 0),
-            if (_frontDotsShouldShow(context, availableSpots)) _buildDots(context),
+            if (_frontDotsShouldShow(context, availableSpots))
+              _buildDots(context),
             if (InheritedNumberPaginator.of(context).numberPages > 1)
               ..._generateButtonList(context, availableSpots),
-            if (_backDotsShouldShow(context, availableSpots)) _buildDots(context),
+            if (_backDotsShouldShow(context, availableSpots))
+              _buildDots(context),
             if (InheritedNumberPaginator.of(context).numberPages > 1)
-              _buildPageButton(context, InheritedNumberPaginator.of(context).numberPages - 1),
+              _buildPageButton(context,
+                  InheritedNumberPaginator.of(context).numberPages - 1),
           ],
         );
       },
@@ -56,15 +59,17 @@ class NumberContent extends StatelessWidget {
       minValue = (maxValue - shownPages).clamp(1, numberPages - 1);
     }
 
-    return List.generate(
-        maxValue - minValue, (index) => _buildPageButton(context, minValue + index));
+    return List.generate(maxValue - minValue,
+        (index) => _buildPageButton(context, minValue + index));
   }
 
   /// Builds a button for the given index.
   Widget _buildPageButton(BuildContext context, int index) => PaginatorButton(
-        onPressed: () => InheritedNumberPaginator.of(context).onPageChange?.call(index),
+        onPressed: () =>
+            InheritedNumberPaginator.of(context).onPageChange?.call(index),
         selected: _selected(index),
-        child: AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 5),
+        child:
+            AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 5),
       );
 
   Widget _buildDots(BuildContext context) => AspectRatio(
@@ -74,13 +79,18 @@ class NumberContent extends StatelessWidget {
           margin: const EdgeInsets.all(4.0),
           alignment: Alignment.bottomCenter,
           decoration: ShapeDecoration(
-            shape: InheritedNumberPaginator.of(context).config.buttonShape ?? const CircleBorder(),
-            color: InheritedNumberPaginator.of(context).config.buttonUnselectedBackgroundColor,
+            shape: InheritedNumberPaginator.of(context).config.buttonShape ??
+                const CircleBorder(),
+            color: InheritedNumberPaginator.of(context)
+                .config
+                .buttonUnselectedBackgroundColor,
           ),
           child: AutoSizeText(
             "...",
             style: TextStyle(
-              color: InheritedNumberPaginator.of(context).config.buttonUnselectedForegroundColor ??
+              color: InheritedNumberPaginator.of(context)
+                      .config
+                      .buttonUnselectedForegroundColor ??
                   Theme.of(context).colorScheme.secondary,
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -92,7 +102,9 @@ class NumberContent extends StatelessWidget {
   /// Checks if pages don't fit in available spots and dots have to be shown.
   bool _backDotsShouldShow(BuildContext context, int availableSpots) =>
       availableSpots < InheritedNumberPaginator.of(context).numberPages &&
-      currentPage < InheritedNumberPaginator.of(context).numberPages - availableSpots ~/ 2;
+      currentPage <
+          InheritedNumberPaginator.of(context).numberPages -
+              availableSpots ~/ 2;
 
   bool _frontDotsShouldShow(BuildContext context, int availableSpots) =>
       availableSpots < InheritedNumberPaginator.of(context).numberPages &&
