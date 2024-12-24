@@ -25,6 +25,7 @@ class _BuilderPageState extends State<BuilderPage> {
     );
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: pages[_currentPage],
       // card for elevation
       bottomNavigationBar: Card(

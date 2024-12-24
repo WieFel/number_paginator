@@ -25,6 +25,7 @@ class _DropdownPageState extends State<DropdownPage> {
     );
 
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         body: pages[_currentPage],
         // card for elevation
         bottomNavigationBar: Card(
@@ -33,8 +34,7 @@ class _DropdownPageState extends State<DropdownPage> {
           child: NumberPaginator(
             numberPages: _numPages,
             // shows a dropdown as the center paginator content
-            config: const NumberPaginatorUIConfig(
-                mode: ContentDisplayMode.dropdown),
+            config: const NumberPaginatorUIConfig(mode: ContentDisplayMode.dropdown),
             onPageChange: (int index) {
               setState(() {
                 _currentPage = index;

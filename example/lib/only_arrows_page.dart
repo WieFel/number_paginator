@@ -25,6 +25,7 @@ class _OnlyArrowsPageState extends State<OnlyArrowsPage> {
     );
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: pages[_currentPage],
       // card for elevation
       bottomNavigationBar: Card(
