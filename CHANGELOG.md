@@ -1,3 +1,7 @@
+## [0.4.2] - 25.12.2024
+
+- Upgrade to Flutter 3.27.1 and other upgrades
+
 ## [0.4.1] - 30.01.2024
 
 - New properties `buttonTextStyle` and `buttonPadding` in the `NumberPaginatorUIConfig`
