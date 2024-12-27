@@ -2,11 +2,12 @@
 
 [![pub.dev](https://img.shields.io/pub/v/number_paginator?logo=dart)](https://pub.dev/packages/number_paginator)
 [![analysis](https://github.com/WieFel/number_paginator/workflows/analysis/badge.svg)](https://github.com/WieFel/number_paginator/actions?query=workflow%3Aanalysis)
+[![demo](https://img.shields.io/badge/demo-web-blue?logo=googlechrome&logoColor=white&color=blue)](https://wiefel.github.io/number_paginator/#/)
 
 A Flutter paginator widget for switching between page numbers. 
 
 <img alt="screenshot1" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/num1.png" width="24%"/> <img alt="screenshot2" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/num2.png" width="24%"/> <img alt="screenshot3" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/num3.png" width="24%"/> <img alt="screenshot3" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/num4.png" width="24%"/>
-
+[→ Check web demo](https://wiefel.github.io/number_paginator/#/)
 
 ## Getting Started
 

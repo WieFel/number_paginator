@@ -9,9 +9,9 @@ class NumberContent extends StatelessWidget {
   final int currentPage;
 
   const NumberContent({
-    Key? key,
+    super.key,
     required this.currentPage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

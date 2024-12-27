@@ -13,11 +13,11 @@ class PaginatorButton extends StatelessWidget {
 
   /// Creates an instance of [PaginatorButton].
   const PaginatorButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.child,
     this.selected = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
