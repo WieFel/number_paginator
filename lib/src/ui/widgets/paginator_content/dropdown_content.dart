@@ -5,9 +5,9 @@ class DropDownContent extends StatelessWidget {
   final int currentPage;
 
   const DropDownContent({
-    Key? key,
+    super.key,
     required this.currentPage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -18,13 +18,13 @@ class InheritedNumberPaginator extends InheritedWidget {
   final NumberPaginatorUIConfig config;
 
   const InheritedNumberPaginator({
-    Key? key,
+    super.key,
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
     required this.config,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   static InheritedNumberPaginator of(BuildContext context) {
     final InheritedNumberPaginator? result =

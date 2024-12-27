@@ -71,7 +71,7 @@ class NumberPaginator extends StatefulWidget {
 
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
-    Key? key,
+    super.key,
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
@@ -85,11 +85,10 @@ class NumberPaginator extends StatefulWidget {
     this.prevButtonBuilder,
     this.nextButtonBuilder,
   })  : assert(initialPage >= 0),
-        assert(initialPage <= numberPages - 1),
-        super(key: key);
+        assert(initialPage <= numberPages - 1);
 
   const NumberPaginator.noPrevNextButtons({
-    Key? key,
+    super.key,
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
@@ -103,8 +102,7 @@ class NumberPaginator extends StatefulWidget {
         prevButtonBuilder = null,
         nextButtonBuilder = null,
         assert(initialPage >= 0),
-        assert(initialPage <= numberPages - 1),
-        super(key: key);
+        assert(initialPage <= numberPages - 1);
 
   @override
   NumberPaginatorState createState() => NumberPaginatorState();

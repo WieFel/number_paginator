@@ -8,9 +8,9 @@ class PaginatorContent extends StatelessWidget {
   final int currentPage;
 
   const PaginatorContent({
-    Key? key,
+    super.key,
     required this.currentPage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
