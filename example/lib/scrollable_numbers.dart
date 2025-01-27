@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 
-class NumbersPage extends StatefulWidget {
-  const NumbersPage({Key? key}) : super(key: key);
+class ScrollableNumbers extends StatefulWidget {
+  const ScrollableNumbers({Key? key}) : super(key: key);
 
   @override
-  _NumbersPageState createState() => _NumbersPageState();
+  _ScrollableNumbersState createState() => _ScrollableNumbersState();
 }
 
-class _NumbersPageState extends State<NumbersPage> {
-  final int _numPages = 10;
+class _ScrollableNumbersState extends State<ScrollableNumbers> {
+  final int _numPages = 100;
   int _currentPage = 0;
 
   @override
@@ -32,6 +32,7 @@ class _NumbersPageState extends State<NumbersPage> {
         margin: EdgeInsets.zero,
         elevation: 4,
         child: NumberPaginator(
+          config: const NumberPaginatorUIConfig(mode: ContentDisplayMode.scrollableNumbers),
           numberPages: _numPages,
           onPageChange: (int index) {
             setState(() {
