@@ -1,3 +1,8 @@
+## [0.4.4] - 02.03.2025
+
+- New property `numbersMainAxisAlignment` in `NumberPaginatorUIConfig` for aligning the numbers in
+  the paginator
+
 ## [0.4.3] - 27.12.2024
 
 - Web demo of the example app
@@ -14,7 +19,8 @@
 
 - New properties `showNextButton` and `showPrevButton` for showing/hiding the next/prev buttons
 - New way to customize prev/next buttons using `prevButtonBuilder` or `nextButtonBuilder`
-- Slight adaptation of margin/padding of "three dots" (only noticeable if it's background is colored)
+- Slight adaptation of margin/padding of "three dots" (only noticeable if it's background is
+  colored)
 
 ## [0.3.2] - 30.07.2023
 
