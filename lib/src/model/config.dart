@@ -34,11 +34,17 @@ class NumberPaginatorUIConfig {
   final ContentDisplayMode mode;
 
   /// The [MainAxisAlignment] of the [Row] that holds the prev/next buttons and
-  /// the page number buttons. This property only takes effect [mode] is set to
+  /// the page number buttons. This property only takes effect if [mode] is set to
   /// [ContentDisplayMode.hidden].
   ///
   /// Defaults to [MainAxisAlignment.start].
   final MainAxisAlignment mainAxisAlignment;
+
+  /// The [MainAxisAlignment] of the [Row] that holds the number buttons.
+  /// This property only takes effect if [mode] is set to [ContentDisplayMode.numbers].
+  ///
+  /// Defaults to [MainAxisAlignment.spaceAround].
+  final MainAxisAlignment numbersMainAxisAlignment;
 
   /// The [EdgeInsets] that should be used as padding for the number paginator's
   /// content.
@@ -63,6 +69,7 @@ class NumberPaginatorUIConfig {
     this.buttonUnselectedBackgroundColor,
     this.mode = ContentDisplayMode.numbers,
     this.mainAxisAlignment = MainAxisAlignment.start,
+    this.numbersMainAxisAlignment = MainAxisAlignment.spaceAround,
     this.contentPadding,
     this.buttonTextStyle,
     this.buttonPadding,
