@@ -14,9 +14,9 @@ class PaginatorContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mode = InheritedNumberPaginator.of(context).config.mode;
+    var config = InheritedNumberPaginator.of(context).config;
 
-    switch (mode) {
+    switch (config.mode) {
       case ContentDisplayMode.numbers:
         return NumberContent(
           currentPage: currentPage,
@@ -26,7 +26,7 @@ class PaginatorContent extends StatelessWidget {
           currentPage: currentPage,
         );
       default:
-        return Container();
+        return SizedBox();
     }
   }
 }

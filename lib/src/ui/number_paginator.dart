@@ -137,17 +137,15 @@ class NumberPaginatorState extends State<NumberPaginator> {
             if (widget.showPrevButton)
               widget.prevButtonBuilder?.call(context) ??
                   PaginatorButton(
-                    onPressed:
-                        _controller.currentPage > 0 ? _controller.prev : null,
+                    onPressed: _controller.currentPage > 0 ? _controller.prev : null,
                     child: widget.prevButtonContent,
                   ),
             ..._buildCenterContent(),
             if (widget.showNextButton)
               widget.nextButtonBuilder?.call(context) ??
                   PaginatorButton(
-                    onPressed: _controller.currentPage < widget.numberPages - 1
-                        ? _controller.next
-                        : null,
+                    onPressed:
+                        _controller.currentPage < widget.numberPages - 1 ? _controller.next : null,
                     child: widget.nextButtonContent,
                   ),
           ],
