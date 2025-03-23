@@ -9,12 +9,12 @@ typedef NumberButtonBuilder = Widget Function(BuildContext context, int index);
 
 class NumberContent extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
-  final NumberButtonBuilder? builder;
+  final NumberButtonBuilder? buttonBuilder;
 
   const NumberContent({
     super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
-    this.builder,
+    this.buttonBuilder,
   });
 
   @override
@@ -69,7 +69,7 @@ class NumberContent extends StatelessWidget {
 
   /// Builds a button for the given index.
   Widget _buildPageButton(BuildContext context, int index) {
-    if (builder != null) return builder!(context, index);
+    if (buttonBuilder != null) return buttonBuilder!(context, index);
 
     final paginator = InheritedNumberPaginator.of(context);
 
