@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/model/config.dart';
-import 'package:number_paginator/src/model/display_mode.dart';
 import 'package:number_paginator/src/ui/number_paginator_controller.dart';
-import 'package:number_paginator/src/ui/widgets/buttons/paginator_button.dart';
 import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
-import 'package:number_paginator/src/ui/widgets/paginator_content.dart';
-
-typedef NumberPaginatorContentBuilder = Widget Function(int index);
 
 /// The main widget used for creating a [NumberPaginator].
 class NumberPaginator extends StatefulWidget {
@@ -20,54 +14,11 @@ class NumberPaginator extends StatefulWidget {
   /// parameter indicates the selected index, starting from 0.
   final Function(int)? onPageChange;
 
-  /// The UI config for the [NumberPaginator].
-  final NumberPaginatorUIConfig config;
-
-  /// A builder for the central content of the paginator. If provided, the
-  /// [config] is ignored.
-  final NumberPaginatorContentBuilder? contentBuilder;
-
   /// The controller for the paginator. Can be used to control the paginator from the outside.
   /// If not provided, a new controller is created.
   final NumberPaginatorController? controller;
 
-  /// Whether the "prev" button should be shown.
-  ///
-  /// Defaults to `true`.
-  final bool showPrevButton;
-
-  /// Whether the "next" button should be shown.
-  ///
-  /// Defaults to `true`.
-  final bool showNextButton;
-
-  /// Content of the "previous" button which when pressed goes one page back.
-  ///
-  /// Defaults to:
-  /// ```dart
-  /// Icon(Icons.chevron_left),
-  /// ```
-  final Widget prevButtonContent;
-
-  /// Content of the "next" button which when pressed goes one page forward.
-  ///
-  /// Defaults to:
-  /// ```dart
-  /// Icon(Icons.chevron_right),
-  /// ```
-  final Widget nextButtonContent;
-
-  /// Builder option for providing a custom "previous" button.
-  ///
-  /// If this is provided, [prevButtonContent] is ignored.
-  /// If [showPrevButton] is `false`, this is ignored.
-  final WidgetBuilder? prevButtonBuilder;
-
-  /// Builder option for providing a custom "next" button.
-  ///
-  /// If this is provided, [nextButtonContent] is ignored.
-  /// If [showNextButton] is `false`, this is ignored.
-  final WidgetBuilder? nextButtonBuilder;
+  final Widget child;
 
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
@@ -75,33 +26,9 @@ class NumberPaginator extends StatefulWidget {
     required this.numberPages,
     this.initialPage = 0,
     this.onPageChange,
-    this.config = const NumberPaginatorUIConfig(),
-    this.contentBuilder,
     this.controller,
-    this.showPrevButton = true,
-    this.showNextButton = true,
-    this.prevButtonContent = const Icon(Icons.chevron_left),
-    this.nextButtonContent = const Icon(Icons.chevron_right),
-    this.prevButtonBuilder,
-    this.nextButtonBuilder,
+    this.child = const SizedBox(),
   })  : assert(initialPage >= 0),
-        assert(initialPage <= numberPages - 1);
-
-  const NumberPaginator.noPrevNextButtons({
-    super.key,
-    required this.numberPages,
-    this.initialPage = 0,
-    this.onPageChange,
-    this.config = const NumberPaginatorUIConfig(),
-    this.contentBuilder,
-    this.controller,
-  })  : showPrevButton = false,
-        showNextButton = false,
-        prevButtonContent = const SizedBox(),
-        nextButtonContent = const SizedBox(),
-        prevButtonBuilder = null,
-        nextButtonBuilder = null,
-        assert(initialPage >= 0),
         assert(initialPage <= numberPages - 1);
 
   @override
@@ -126,50 +53,29 @@ class NumberPaginatorState extends State<NumberPaginator> {
   Widget build(BuildContext context) {
     return InheritedNumberPaginator(
       numberPages: widget.numberPages,
+      controller: _controller,
       initialPage: widget.initialPage,
       onPageChange: _controller.navigateToPage,
-      config: widget.config,
-      child: SizedBox(
-        height: widget.config.height,
-        child: Row(
-          mainAxisAlignment: widget.config.mainAxisAlignment,
-          children: [
-            if (widget.showPrevButton)
-              widget.prevButtonBuilder?.call(context) ??
-                  PaginatorButton(
-                    onPressed: _controller.currentPage > 0 ? _controller.prev : null,
-                    child: widget.prevButtonContent,
-                  ),
-            ..._buildCenterContent(),
-            if (widget.showNextButton)
-              widget.nextButtonBuilder?.call(context) ??
-                  PaginatorButton(
-                    onPressed:
-                        _controller.currentPage < widget.numberPages - 1 ? _controller.next : null,
-                    child: widget.nextButtonContent,
-                  ),
-          ],
-        ),
-      ),
+      child: widget.child,
+      // Row(
+      //   mainAxisAlignment: widget.config.mainAxisAlignment,
+      //   children: [
+      //     if (widget.showPrevButton)
+      //       widget.prevButtonBuilder?.call(context) ??
+      //           PaginatorButton(
+      //             onPressed: _controller.currentPage > 0 ? _controller.prev : null,
+      //             child: widget.prevButtonContent,
+      //           ),
+      //     ..._buildCenterContent(),
+      //     if (widget.showNextButton)
+      //       widget.nextButtonBuilder?.call(context) ??
+      //           PaginatorButton(
+      //             onPressed:
+      //                 _controller.currentPage < widget.numberPages - 1 ? _controller.next : null,
+      //             child: widget.nextButtonContent,
+      //           ),
+      //   ],
+      // ),
     );
-  }
-
-  List<Widget> _buildCenterContent() {
-    return [
-      if (widget.contentBuilder != null)
-        Container(
-          padding: widget.config.contentPadding,
-          child: widget.contentBuilder!(_controller.currentPage),
-        )
-      else if (widget.config.mode != ContentDisplayMode.hidden)
-        Expanded(
-          child: Container(
-            padding: widget.config.contentPadding,
-            child: PaginatorContent(
-              currentPage: _controller.currentPage,
-            ),
-          ),
-        ),
-    ];
   }
 }

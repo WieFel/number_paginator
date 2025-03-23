@@ -34,7 +34,20 @@ class _DropdownPageState extends State<DropdownPage> {
           child: NumberPaginator(
             numberPages: _numPages,
             // shows a dropdown as the center paginator content
-            config: const NumberPaginatorUIConfig(mode: ContentDisplayMode.dropdown),
+            child: SizedBox(
+              height: 48,
+              child: Row(
+                children: [
+                  const PrevButton(),
+                  Expanded(
+                    child: DropDownContent(
+                      currentPage: _currentPage,
+                    ),
+                  ),
+                  const NextButton(),
+                ],
+              ),
+            ),
             onPageChange: (int index) {
               setState(() {
                 _currentPage = index;

@@ -33,9 +33,15 @@ class _OnlyArrowsPageState extends State<OnlyArrowsPage> {
         elevation: 4,
         child: NumberPaginator(
           numberPages: _numPages,
-          // shows only default arrows, no center content of paginator
-          config:
-              const NumberPaginatorUIConfig(mode: ContentDisplayMode.hidden),
+          child: const SizedBox(
+            height: 48,
+            child: Row(
+              children: [
+                PrevButton(),
+                NextButton(),
+              ],
+            ),
+          ),
           onPageChange: (int index) {
             setState(() {
               _currentPage = index;

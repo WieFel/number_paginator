@@ -7,10 +7,12 @@ import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart'
 
 class NumberContent extends StatelessWidget {
   final int currentPage;
+  final MainAxisAlignment mainAxisAlignment;
 
   const NumberContent({
     super.key,
     required this.currentPage,
+    this.mainAxisAlignment = MainAxisAlignment.start,
   });
 
   @override
@@ -23,7 +25,7 @@ class NumberContent extends StatelessWidget {
         var availableSpots = (constraints.maxWidth / buttonWidth).floor();
 
         return Row(
-          mainAxisAlignment: InheritedNumberPaginator.of(context).config.numbersMainAxisAlignment,
+          mainAxisAlignment: mainAxisAlignment,
           children: [
             _buildPageButton(context, 0),
             if (_frontDotsShouldShow(context, availableSpots)) _buildDots(context),
@@ -73,18 +75,18 @@ class NumberContent extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           margin: const EdgeInsets.all(4.0),
           alignment: Alignment.bottomCenter,
-          decoration: ShapeDecoration(
-            shape: InheritedNumberPaginator.of(context).config.buttonShape ?? const CircleBorder(),
-            color: InheritedNumberPaginator.of(context).config.buttonUnselectedBackgroundColor,
-          ),
+          // decoration: ShapeDecoration(
+          //   shape: InheritedNumberPaginator.of(context).config.buttonShape ?? const CircleBorder(),
+          //   color: InheritedNumberPaginator.of(context).config.buttonUnselectedBackgroundColor,
+          // ),
           child: AutoSizeText(
             "...",
-            style: TextStyle(
-              color: InheritedNumberPaginator.of(context).config.buttonUnselectedForegroundColor ??
-                  Theme.of(context).colorScheme.secondary,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            // style: TextStyle(
+            //   color: InheritedNumberPaginator.of(context).config.buttonUnselectedForegroundColor ??
+            //       Theme.of(context).colorScheme.secondary,
+            //   fontSize: 16,
+            //   fontWeight: FontWeight.bold,
+            // ),
           ),
         ),
       );

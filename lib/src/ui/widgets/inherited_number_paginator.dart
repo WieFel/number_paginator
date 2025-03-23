@@ -10,19 +10,19 @@ class InheritedNumberPaginator extends InheritedWidget {
   /// Index of initially selected page.
   final int initialPage;
 
+  /// The number paginator controller
+  final NumberPaginatorController controller;
+
   /// This function is called when the user switches between pages. The received
   /// parameter indicates the selected index, starting from 0.
   final Function(int)? onPageChange;
 
-  /// The UI config for the [NumberPaginator].
-  final NumberPaginatorUIConfig config;
-
   const InheritedNumberPaginator({
     super.key,
     required this.numberPages,
+    required this.controller,
     this.initialPage = 0,
     this.onPageChange,
-    required this.config,
     required super.child,
   });
 

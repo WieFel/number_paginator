@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 
 class PaginatorButton extends StatelessWidget {
   /// Callback for button press.
@@ -21,7 +20,6 @@ class PaginatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = InheritedNumberPaginator.of(context).config;
     return AspectRatio(
       aspectRatio: 1,
       child: Padding(
@@ -29,11 +27,8 @@ class PaginatorButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           style: TextButton.styleFrom(
-            shape: config.buttonShape ?? const CircleBorder(),
             backgroundColor: _backgroundColor(context, selected),
             foregroundColor: _foregroundColor(context, selected),
-            textStyle: config.buttonTextStyle,
-            padding: config.buttonPadding,
           ),
           child: child,
         ),
@@ -41,21 +36,9 @@ class PaginatorButton extends StatelessWidget {
     );
   }
 
-  Color? _backgroundColor(BuildContext context, bool selected) => selected
-      ? (InheritedNumberPaginator.of(context)
-              .config
-              .buttonSelectedBackgroundColor ??
-          Theme.of(context).colorScheme.secondary)
-      : InheritedNumberPaginator.of(context)
-          .config
-          .buttonUnselectedBackgroundColor;
+  Color? _backgroundColor(BuildContext context, bool selected) =>
+      selected ? Theme.of(context).colorScheme.secondary : null;
 
-  Color? _foregroundColor(BuildContext context, bool selected) => selected
-      ? (InheritedNumberPaginator.of(context)
-              .config
-              .buttonSelectedForegroundColor ??
-          Colors.white)
-      : InheritedNumberPaginator.of(context)
-          .config
-          .buttonUnselectedForegroundColor;
+  Color? _foregroundColor(BuildContext context, bool selected) =>
+      selected ? Theme.of(context).colorScheme.onSecondary : null;
 }

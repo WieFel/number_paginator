@@ -35,10 +35,10 @@ class HomePage extends StatelessWidget {
           title: const Text("Number Paginator"),
           bottom: const TabBar(
             tabs: [
-              Tab(child: Text("Hidden")),
+              Tab(child: Text("Arrows")),
               Tab(child: Text("Numbers")),
               Tab(child: Text("Dropdown")),
-              Tab(child: Text("Custom Builder")),
+              Tab(child: Text("Custom")),
             ],
           ),
         ),

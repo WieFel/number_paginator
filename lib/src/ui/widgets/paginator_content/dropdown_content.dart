@@ -30,18 +30,12 @@ class DropDownContent extends StatelessWidget {
           child: Text(
             (index + 1).toString(),
             style: TextStyle(
-              color: _selected(index)
-                  ? InheritedNumberPaginator.of(context)
-                          .config
-                          .buttonSelectedBackgroundColor ??
-                      Theme.of(context).colorScheme.secondary
-                  : null,
+              color: _selected(index) ? Theme.of(context).colorScheme.secondary : null,
             ),
           ),
         ),
       ),
-      onChanged: (index) =>
-          InheritedNumberPaginator.of(context).onPageChange?.call(index ?? 0),
+      onChanged: (index) => InheritedNumberPaginator.of(context).onPageChange?.call(index ?? 0),
     );
   }
 

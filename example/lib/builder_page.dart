@@ -33,11 +33,12 @@ class _BuilderPageState extends State<BuilderPage> {
         elevation: 4,
         child: NumberPaginator(
           numberPages: _numPages,
-          contentBuilder: (index) => Expanded(
-            child: Center(
-              child: Text("Currently selected page: ${index + 1}"),
-            ),
-          ),
+          child: SizedBox(),
+          // contentBuilder: (index) => Expanded(
+          //   child: Center(
+          //     child: Text("Currently selected page: ${index + 1}"),
+          //   ),
+          // ),
           onPageChange: (int index) {
             setState(() {
               _currentPage = index;
