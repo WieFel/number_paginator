@@ -1,3 +1,3 @@
 library number_paginator;
 
-export 'ui/ui.dart';
+export 'src/ui/ui.dart';

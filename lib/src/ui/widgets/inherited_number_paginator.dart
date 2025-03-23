@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/number_paginator.dart';
+
+import '../number_paginator_controller.dart';
 
 /// [InheritedWidget] for providing information for the children of
 /// [NumberPaginator].
