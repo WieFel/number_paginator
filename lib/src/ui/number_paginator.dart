@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'number_paginator_controller.dart';
+import 'controller.dart';
 import 'widgets/widgets.dart';
 
 /// The main widget used for creating a [NumberPaginator].
@@ -19,6 +19,11 @@ class NumberPaginator extends StatefulWidget {
   /// If not provided, a new controller is created.
   final NumberPaginatorController? controller;
 
+  /// The child of the number paginator. This actually defines the look and feel of the pagination.
+  /// Use one of the following content widgets: [NumberContent], [DropDownContent], [CustomContent],
+  /// or you can even build your own content, e.g. by just using a [Row] and [PrevButton]/[NextButton].
+  ///
+  /// See the example app for examples.
   final Widget child;
 
   /// Creates an instance of [NumberPaginator].
@@ -58,25 +63,12 @@ class NumberPaginatorState extends State<NumberPaginator> {
       initialPage: widget.initialPage,
       onPageChange: _controller.navigateToPage,
       child: widget.child,
-      // Row(
-      //   mainAxisAlignment: widget.config.mainAxisAlignment,
-      //   children: [
-      //     if (widget.showPrevButton)
-      //       widget.prevButtonBuilder?.call(context) ??
-      //           PaginatorButton(
-      //             onPressed: _controller.currentPage > 0 ? _controller.prev : null,
-      //             child: widget.prevButtonContent,
-      //           ),
-      //     ..._buildCenterContent(),
-      //     if (widget.showNextButton)
-      //       widget.nextButtonBuilder?.call(context) ??
-      //           PaginatorButton(
-      //             onPressed:
-      //                 _controller.currentPage < widget.numberPages - 1 ? _controller.next : null,
-      //             child: widget.nextButtonContent,
-      //           ),
-      //   ],
-      // ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 }

@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../buttons/buttons.dart';
-import '../inherited_number_paginator.dart';
+import '../inherited_paginator.dart';
 
 class NumberContent extends StatelessWidget {
   final int currentPage;

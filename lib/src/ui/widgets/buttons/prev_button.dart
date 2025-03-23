@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../inherited_number_paginator.dart';
+import '../inherited_paginator.dart';
 import 'paginator_button.dart';
 
 class PrevButton extends StatelessWidget {
@@ -11,9 +11,7 @@ class PrevButton extends StatelessWidget {
     final paginator = InheritedNumberPaginator.of(context);
 
     return PaginatorButton(
-      onPressed: paginator.controller.currentPage > 0
-          ? () => InheritedNumberPaginator.of(context).controller.prev()
-          : null,
+      onPressed: paginator.isPrevAllowed ? () => paginator.controller.prev() : null,
       child: Icon(Icons.chevron_left),
     );
   }

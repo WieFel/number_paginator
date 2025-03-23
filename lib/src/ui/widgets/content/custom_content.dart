@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../inherited_number_paginator.dart';
+import '../inherited_paginator.dart';
 
 typedef CustomContentBuilder = Widget Function(BuildContext context, int currentPage);
 
@@ -11,8 +11,9 @@ class CustomContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentPage = InheritedNumberPaginator.of(context).controller.currentPage;
-
-    return builder(context, currentPage);
+    return builder(
+      context,
+      InheritedNumberPaginator.of(context).controller.currentPage,
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../number_paginator_controller.dart';
+import '../controller.dart';
 
 /// [InheritedWidget] for providing information for the children of
 /// [NumberPaginator].
@@ -35,5 +35,15 @@ class InheritedNumberPaginator extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(InheritedNumberPaginator oldWidget) => true;
+  bool updateShouldNotify(InheritedNumberPaginator oldWidget) =>
+      numberPages != oldWidget.numberPages ||
+      initialPage != oldWidget.initialPage ||
+      controller != oldWidget.controller ||
+      onPageChange != oldWidget.onPageChange;
+
+  /// Whether it is currently allowed to navigate to the previous page
+  bool get isPrevAllowed => controller.currentPage > 0;
+
+  /// Whether it is currently allowed to navigate to the next page
+  bool get isNextAllowed => controller.currentPage < numberPages - 1;
 }
