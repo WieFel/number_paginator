@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
 
 class DropDownContent extends StatelessWidget {
-  final int currentPage;
-
-  const DropDownContent({
-    super.key,
-    required this.currentPage,
-  });
+  const DropDownContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final currentPage = InheritedNumberPaginator.of(context).controller.currentPage;
+    selected(index) => index == currentPage;
+
     return DropdownButton<int>(
       isExpanded: true,
       value: currentPage,
@@ -30,7 +28,7 @@ class DropDownContent extends StatelessWidget {
           child: Text(
             (index + 1).toString(),
             style: TextStyle(
-              color: _selected(index) ? Theme.of(context).colorScheme.secondary : null,
+              color: selected(index) ? Theme.of(context).colorScheme.secondary : null,
             ),
           ),
         ),
@@ -38,7 +36,4 @@ class DropDownContent extends StatelessWidget {
       onChanged: (index) => InheritedNumberPaginator.of(context).onPageChange?.call(index ?? 0),
     );
   }
-
-  /// Checks if the given index is currently selected.
-  bool _selected(index) => index == currentPage;
 }
