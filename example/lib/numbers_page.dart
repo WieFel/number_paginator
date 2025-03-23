@@ -39,17 +39,15 @@ class _NumbersPageState extends State<NumbersPage> {
               _currentPage = index;
             });
           },
-          child: SizedBox(
+          child: const SizedBox(
             height: 48,
             child: Row(
               children: [
-                const PrevButton(),
+                PrevButton(),
                 Expanded(
-                  child: NumberContent(
-                    currentPage: _currentPage,
-                  ),
+                  child: NumberContent(),
                 ),
-                const NextButton(),
+                NextButton(),
               ],
             ),
           ),

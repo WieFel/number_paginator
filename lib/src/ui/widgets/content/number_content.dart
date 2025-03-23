@@ -1,23 +1,26 @@
 import 'dart:math';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../buttons/buttons.dart';
 import '../inherited_paginator.dart';
 
+typedef NumberButtonBuilder = Widget Function(BuildContext context, int index);
+
 class NumberContent extends StatelessWidget {
-  final int currentPage;
   final MainAxisAlignment mainAxisAlignment;
+  final NumberButtonBuilder? builder;
 
   const NumberContent({
     super.key,
-    required this.currentPage,
     this.mainAxisAlignment = MainAxisAlignment.start,
+    this.builder,
   });
 
   @override
   Widget build(BuildContext context) {
+    final numberPages = InheritedNumberPaginator.of(context).numberPages;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         /// Buttons have an aspect ratio of 1:1. Therefore use paginator height as
@@ -30,11 +33,9 @@ class NumberContent extends StatelessWidget {
           children: [
             _buildPageButton(context, 0),
             if (_frontDotsShouldShow(context, availableSpots)) _buildDots(context),
-            if (InheritedNumberPaginator.of(context).numberPages > 1)
-              ..._generateButtonList(context, availableSpots),
+            if (numberPages > 1) ..._generateButtonList(context, availableSpots),
             if (_backDotsShouldShow(context, availableSpots)) _buildDots(context),
-            if (InheritedNumberPaginator.of(context).numberPages > 1)
-              _buildPageButton(context, InheritedNumberPaginator.of(context).numberPages - 1),
+            if (numberPages > 1) _buildPageButton(context, numberPages - 1),
           ],
         );
       },
@@ -50,25 +51,34 @@ class NumberContent extends StatelessWidget {
         (_backDotsShouldShow(context, availableSpots) ? 1 : 0) -
         (_frontDotsShouldShow(context, availableSpots) ? 1 : 0);
 
-    var numberPages = InheritedNumberPaginator.of(context).numberPages;
+    final paginator = InheritedNumberPaginator.of(context);
+    final numberPages = paginator.numberPages;
 
     int minValue, maxValue;
-    minValue = max(1, currentPage - shownPages ~/ 2);
+    minValue = max(1, paginator.currentPage - shownPages ~/ 2);
     maxValue = min(minValue + shownPages, numberPages - 1);
     if (maxValue - minValue < shownPages) {
       minValue = (maxValue - shownPages).clamp(1, numberPages - 1);
     }
 
     return List.generate(
-        maxValue - minValue, (index) => _buildPageButton(context, minValue + index));
+      maxValue - minValue,
+      (index) => _buildPageButton(context, minValue + index),
+    );
   }
 
   /// Builds a button for the given index.
-  Widget _buildPageButton(BuildContext context, int index) => PaginatorButton(
-        onPressed: () => InheritedNumberPaginator.of(context).onPageChange?.call(index),
-        selected: _selected(index),
-        child: AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 5),
-      );
+  Widget _buildPageButton(BuildContext context, int index) {
+    if (builder != null) return builder!(context, index);
+
+    final paginator = InheritedNumberPaginator.of(context);
+
+    return PaginatorButton(
+      onPressed: () => paginator.onPageChange?.call(index),
+      selected: index == paginator.currentPage,
+      child: Text((index + 1).toString(), maxLines: 1),
+    );
+  }
 
   Widget _buildDots(BuildContext context) => AspectRatio(
         aspectRatio: 1,
@@ -76,31 +86,22 @@ class NumberContent extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           margin: const EdgeInsets.all(4.0),
           alignment: Alignment.bottomCenter,
-          // decoration: ShapeDecoration(
-          //   shape: InheritedNumberPaginator.of(context).config.buttonShape ?? const CircleBorder(),
-          //   color: InheritedNumberPaginator.of(context).config.buttonUnselectedBackgroundColor,
-          // ),
-          child: AutoSizeText(
-            "...",
-            // style: TextStyle(
-            //   color: InheritedNumberPaginator.of(context).config.buttonUnselectedForegroundColor ??
-            //       Theme.of(context).colorScheme.secondary,
-            //   fontSize: 16,
-            //   fontWeight: FontWeight.bold,
-            // ),
-          ),
+          child: Text("..."),
         ),
       );
 
   /// Checks if pages don't fit in available spots and dots have to be shown.
-  bool _backDotsShouldShow(BuildContext context, int availableSpots) =>
-      availableSpots < InheritedNumberPaginator.of(context).numberPages &&
-      currentPage < InheritedNumberPaginator.of(context).numberPages - availableSpots ~/ 2;
+  bool _backDotsShouldShow(BuildContext context, int availableSpots) {
+    final paginator = InheritedNumberPaginator.of(context);
 
-  bool _frontDotsShouldShow(BuildContext context, int availableSpots) =>
-      availableSpots < InheritedNumberPaginator.of(context).numberPages &&
-      currentPage > availableSpots ~/ 2 - 1;
+    return availableSpots < paginator.numberPages &&
+        paginator.currentPage < paginator.numberPages - availableSpots ~/ 2;
+  }
 
-  /// Checks if the given index is currently selected.
-  bool _selected(index) => index == currentPage;
+  bool _frontDotsShouldShow(BuildContext context, int availableSpots) {
+    final paginator = InheritedNumberPaginator.of(context);
+
+    return availableSpots < paginator.numberPages &&
+        paginator.currentPage > availableSpots ~/ 2 - 1;
+  }
 }

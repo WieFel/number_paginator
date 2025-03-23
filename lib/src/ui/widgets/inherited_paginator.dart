@@ -35,15 +35,15 @@ class InheritedNumberPaginator extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(InheritedNumberPaginator oldWidget) =>
-      numberPages != oldWidget.numberPages ||
-      initialPage != oldWidget.initialPage ||
-      controller != oldWidget.controller ||
-      onPageChange != oldWidget.onPageChange;
+  // TODO: optimization -> don't just return true always
+  bool updateShouldNotify(InheritedNumberPaginator oldWidget) => true;
 
   /// Whether it is currently allowed to navigate to the previous page
   bool get isPrevAllowed => controller.currentPage > 0;
 
   /// Whether it is currently allowed to navigate to the next page
   bool get isNextAllowed => controller.currentPage < numberPages - 1;
+
+  /// Alias for `controller.currentPage`
+  int get currentPage => controller.currentPage;
 }
