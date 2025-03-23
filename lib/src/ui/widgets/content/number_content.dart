@@ -13,7 +13,7 @@ class NumberContent extends StatelessWidget {
 
   const NumberContent({
     super.key,
-    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.mainAxisAlignment = MainAxisAlignment.spaceAround,
     this.buttonBuilder,
   });
 
@@ -32,9 +32,9 @@ class NumberContent extends StatelessWidget {
           mainAxisAlignment: mainAxisAlignment,
           children: [
             _buildPageButton(context, 0),
-            if (_frontDotsShouldShow(context, availableSpots)) _buildDots(context),
+            if (_frontDotsShouldShow(context, availableSpots)) _Dots(),
             if (numberPages > 1) ..._generateButtonList(context, availableSpots),
-            if (_backDotsShouldShow(context, availableSpots)) _buildDots(context),
+            if (_backDotsShouldShow(context, availableSpots)) _Dots(),
             if (numberPages > 1) _buildPageButton(context, numberPages - 1),
           ],
         );
@@ -80,16 +80,6 @@ class NumberContent extends StatelessWidget {
     );
   }
 
-  Widget _buildDots(BuildContext context) => AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          padding: const EdgeInsets.all(4.0),
-          margin: const EdgeInsets.all(4.0),
-          alignment: Alignment.bottomCenter,
-          child: Text("..."),
-        ),
-      );
-
   /// Checks if pages don't fit in available spots and dots have to be shown.
   bool _backDotsShouldShow(BuildContext context, int availableSpots) {
     final paginator = InheritedNumberPaginator.of(context);
@@ -103,5 +93,22 @@ class NumberContent extends StatelessWidget {
 
     return availableSpots < paginator.numberPages &&
         paginator.currentPage > availableSpots ~/ 2 - 1;
+  }
+}
+
+class _Dots extends StatelessWidget {
+  const _Dots();
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Container(
+        padding: const EdgeInsets.all(4.0),
+        margin: const EdgeInsets.all(4.0),
+        alignment: Alignment.bottomCenter,
+        child: Text("..."),
+      ),
+    );
   }
 }
