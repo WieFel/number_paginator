@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/ui/widgets/buttons/paginator_button.dart';
-import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
+
+import '../inherited_number_paginator.dart';
+import 'paginator_button.dart';
 
 class NextButton extends StatelessWidget {
   const NextButton({super.key});

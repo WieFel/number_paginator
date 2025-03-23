@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
+
+import '../inherited_number_paginator.dart';
 
 typedef CustomContentBuilder = Widget Function(BuildContext context, int currentPage);
 

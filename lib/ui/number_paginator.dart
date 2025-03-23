@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/src/ui/number_paginator_controller.dart';
-import 'package:number_paginator/src/ui/widgets/inherited_number_paginator.dart';
+
+import 'number_paginator_controller.dart';
+import 'widgets/widgets.dart';
 
 /// The main widget used for creating a [NumberPaginator].
 class NumberPaginator extends StatefulWidget {
