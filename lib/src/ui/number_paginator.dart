@@ -42,7 +42,7 @@ class NumberPaginator extends StatefulWidget {
 }
 
 class NumberPaginatorState extends State<NumberPaginator> {
-  late NumberPaginatorController _controller;
+  late final NumberPaginatorController _controller;
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class NumberPaginatorState extends State<NumberPaginator> {
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 }
