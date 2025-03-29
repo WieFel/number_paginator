@@ -23,7 +23,7 @@ class NumberPaginator extends StatefulWidget {
   /// Use one of the following content widgets: [NumberContent], [DropDownContent], [CustomContent],
   /// or you can even build your own content, e.g. by just using a [Row] and [PrevButton]/[NextButton].
   ///
-  /// See the example app for examples.
+  /// Defaults to `const NumberContent()`.
   final Widget child;
 
   /// Creates an instance of [NumberPaginator].
@@ -33,7 +33,7 @@ class NumberPaginator extends StatefulWidget {
     this.initialPage = 0,
     this.onPageChange,
     this.controller,
-    this.child = const SizedBox(),
+    this.child = const NumberContent(),
   })  : assert(initialPage >= 0),
         assert(initialPage <= numberPages - 1);
 
