@@ -8,11 +8,11 @@ class InheritedNumberPaginator extends InheritedWidget {
   /// Total number of pages that should be shown.
   final int numberPages;
 
-  /// Index of initially selected page.
-  final int initialPage;
-
   /// The number paginator controller
   final NumberPaginatorController controller;
+
+  /// Index of initially selected page.
+  final int initialPage;
 
   /// This function is called when the user switches between pages. The received
   /// parameter indicates the selected index, starting from 0.
@@ -34,14 +34,11 @@ class InheritedNumberPaginator extends InheritedWidget {
   }
 
   @override
-  // TODO: optimization -> don't just return true always
-  bool updateShouldNotify(InheritedNumberPaginator oldWidget) => true;
-
-  /// Whether it is currently allowed to navigate to the previous page
-  bool get isPrevAllowed => controller.currentPage > 0;
-
-  /// Whether it is currently allowed to navigate to the next page
-  bool get isNextAllowed => controller.currentPage < numberPages - 1;
+  bool updateShouldNotify(InheritedNumberPaginator oldWidget) =>
+      numberPages != oldWidget.numberPages ||
+      controller != oldWidget.controller ||
+      initialPage != oldWidget.initialPage ||
+      onPageChange != oldWidget.onPageChange;
 
   /// Alias for `controller.currentPage`
   int get currentPage => controller.currentPage;

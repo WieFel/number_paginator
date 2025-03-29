@@ -8,10 +8,17 @@ class PrevButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final paginator = InheritedNumberPaginator.of(context);
+    final controller = InheritedNumberPaginator.of(context).controller;
 
-    return PaginatorButton(
-      onPressed: paginator.isPrevAllowed ? () => paginator.controller.prev() : null,
+    return ValueListenableBuilder<int>(
+      valueListenable: controller,
+      builder: (context, currentPage, child) {
+        final prevAllowed = currentPage > 0;
+        return PaginatorButton(
+          onPressed: prevAllowed ? () => controller.prev() : null,
+          child: child!,
+        );
+      },
       child: Icon(Icons.chevron_left),
     );
   }

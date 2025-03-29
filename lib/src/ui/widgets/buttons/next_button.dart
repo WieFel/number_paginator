@@ -10,8 +10,15 @@ class NextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final paginator = InheritedNumberPaginator.of(context);
 
-    return PaginatorButton(
-      onPressed: paginator.isNextAllowed ? () => paginator.controller.next() : null,
+    return ValueListenableBuilder<int>(
+      valueListenable: paginator.controller,
+      builder: (context, currentPage, child) {
+        final nextAllowed = currentPage < paginator.numberPages - 1;
+        return PaginatorButton(
+          onPressed: nextAllowed ? () => paginator.controller.next() : null,
+          child: child!,
+        );
+      },
       child: Icon(Icons.chevron_right),
     );
   }
