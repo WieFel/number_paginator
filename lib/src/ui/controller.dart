@@ -11,19 +11,11 @@ class NumberPaginatorController extends ChangeNotifier {
   }
 
   /// Decreases page by 1 and notifies listeners
-  prev() {
-    _currentPage--;
-    notifyListeners();
-  }
+  void prev() => currentPage--;
 
   /// Increases page by 1 and notifies listeners
-  next() {
-    _currentPage++;
-    notifyListeners();
-  }
+  void next() => currentPage++;
 
   /// Alias for setter
-  navigateToPage(int index) {
-    currentPage = index;
-  }
+  void navigateToPage(int index) => currentPage = index;
 }
