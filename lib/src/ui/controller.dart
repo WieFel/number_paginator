@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NumberPaginatorController extends ChangeNotifier {
-  int _currentPage = 0;
+class NumberPaginatorController extends ValueNotifier<int> {
+  NumberPaginatorController() : super(0);
 
-  int get currentPage => _currentPage;
+  int get currentPage => value;
 
-  set currentPage(int value) {
-    _currentPage = value;
-    notifyListeners();
-  }
+  set currentPage(int value) => super.value = value;
 
   /// Decreases page by 1 and notifies listeners
   void prev() => currentPage--;
