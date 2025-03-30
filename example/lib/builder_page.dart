@@ -27,10 +27,7 @@ class _BuilderPageState extends State<BuilderPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: pages[_currentPage],
-      // card for elevation
-      bottomNavigationBar: Card(
-        margin: EdgeInsets.zero,
-        elevation: 4,
+      bottomNavigationBar: Material(
         child: NumberPaginator(
           numberPages: _numPages,
           child: SizedBox(
