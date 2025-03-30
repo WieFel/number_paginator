@@ -26,6 +26,9 @@ NumberPaginator(
   },
 )
 ```
+<p align="center">
+  <img alt="custom buttons" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/usage1.png" width="30%"/>
+</p>
 
 ### With arrow buttons
 From version 1.0.0 on, the back/next buttons are **not** shown by default. You can manually add `PrevButton` and `NextButton` widgets, which come included with the package. This gives more freedom compared to the versions before 1.0.0, and lets you customize the layout as you need.
