@@ -21,16 +21,16 @@ class NumberContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final numberPages = InheritedNumberPaginator.of(context).numberPages;
 
-    return ValueListenableBuilder<int>(
-      valueListenable: InheritedNumberPaginator.of(context).controller,
-      builder: (context, currentPage, child) => LayoutBuilder(
-        builder: (context, constraints) {
-          /// Buttons have an aspect ratio of 1:1. Therefore use paginator height as
-          /// button width.
-          var buttonWidth = constraints.maxHeight;
-          var availableSpots = (constraints.maxWidth / buttonWidth).floor();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        /// Buttons have an aspect ratio of 1:1. Therefore use paginator height as
+        /// button width.
+        var buttonWidth = constraints.maxHeight;
+        var availableSpots = (constraints.maxWidth / buttonWidth).floor();
 
-          return Row(
+        return ValueListenableBuilder<int>(
+          valueListenable: InheritedNumberPaginator.of(context).controller,
+          builder: (context, currentPage, child) => Row(
             mainAxisAlignment: mainAxisAlignment,
             children: [
               _buildPageButton(context, currentPage, 0),
@@ -39,9 +39,9 @@ class NumberContent extends StatelessWidget {
               if (_backDotsShouldShow(numberPages, currentPage, availableSpots)) _Dots(),
               if (numberPages > 1) _buildPageButton(context, currentPage, numberPages - 1),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
