@@ -1,3 +1,13 @@
+## [1.0.0] - 30.03.2025
+
+- **BREAKING**: Arrow buttons not shown by default anymore. Use included `PrevButton` and `NextButton`
+  anywhere below `NumberPaginator` in the tree to show them
+- **BREAKING**: `NumberPaginatorUIConfig` removed. Customizations are now possible in a more flexible
+  way, by directly using composition of child widgets, wrapping `NumberPaginator` in a `Theme`, or using `builder` functions
+- `PaginatorButton` texts are not scaling their font size automatically anymore (auto_size_text dependency
+  was removed). Padding of buttons was removed, so more text can fit into them
+- Simpler API of `NumberPaginator` with less properties
+
 ## [0.4.4] - 02.03.2025
 
 - New property `numbersMainAxisAlignment` in `NumberPaginatorUIConfig` for aligning the numbers in
