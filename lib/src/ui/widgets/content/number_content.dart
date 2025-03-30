@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../buttons/buttons.dart';
 import '../inherited_paginator.dart';
 
-typedef NumberButtonBuilder = Widget Function(BuildContext context, int index);
+typedef NumberButtonBuilder = Widget Function(BuildContext context, int index, bool isSelected);
 
 class NumberContent extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
@@ -69,7 +69,7 @@ class NumberContent extends StatelessWidget {
 
   /// Builds a button for the given index.
   Widget _buildPageButton(BuildContext context, int currentPage, int index) {
-    if (buttonBuilder != null) return buttonBuilder!(context, index);
+    if (buttonBuilder != null) return buttonBuilder!(context, index, index == currentPage);
 
     return _NumberButton(index, currentPage);
   }
