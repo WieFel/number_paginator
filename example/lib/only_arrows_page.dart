@@ -27,15 +27,18 @@ class _OnlyArrowsPageState extends State<OnlyArrowsPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: pages[_currentPage],
-      // card for elevation
-      bottomNavigationBar: Card(
-        margin: EdgeInsets.zero,
-        elevation: 4,
+      bottomNavigationBar: Material(
         child: NumberPaginator(
           numberPages: _numPages,
-          // shows only default arrows, no center content of paginator
-          config:
-              const NumberPaginatorUIConfig(mode: ContentDisplayMode.hidden),
+          child: const SizedBox(
+            height: 48,
+            child: Row(
+              children: [
+                PrevButton(),
+                NextButton(),
+              ],
+            ),
+          ),
           onPageChange: (int index) {
             setState(() {
               _currentPage = index;

@@ -27,14 +27,22 @@ class _DropdownPageState extends State<DropdownPage> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         body: pages[_currentPage],
-        // card for elevation
-        bottomNavigationBar: Card(
-          margin: EdgeInsets.zero,
-          elevation: 4,
+        bottomNavigationBar: Material(
           child: NumberPaginator(
             numberPages: _numPages,
             // shows a dropdown as the center paginator content
-            config: const NumberPaginatorUIConfig(mode: ContentDisplayMode.dropdown),
+            child: const SizedBox(
+              height: 48,
+              child: Row(
+                children: [
+                  PrevButton(),
+                  Expanded(
+                    child: DropDownContent(),
+                  ),
+                  NextButton(),
+                ],
+              ),
+            ),
             onPageChange: (int index) {
               setState(() {
                 _currentPage = index;
