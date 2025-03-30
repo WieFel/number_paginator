@@ -27,7 +27,7 @@ NumberPaginator(
 )
 ```
 <p align="center">
-  <img alt="custom buttons" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/usage1.png" width="30%"/>
+  <img alt="simple usage screenshot" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/usage_1.png" width="30%"/>
 </p>
 
 ### With arrow buttons
