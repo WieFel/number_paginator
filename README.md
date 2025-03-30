@@ -264,7 +264,6 @@ class _NumbersPageState extends State<NumbersPage> {
       body: pages[_currentPage],
       bottomNavigationBar: Material(
         child: NumberPaginator(
-          // by default, the paginator shows numbers as center content
           numberPages: _numPages,
           onPageChange: (int index) {
             setState(() {
