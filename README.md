@@ -289,8 +289,9 @@ class _NumbersPageState extends State<NumbersPage> {
 }
 ```
 
+## Usage - Version 0.4.4 or older
 <details>
-<summary>Usage - Version 0.4.4 or older</summary>
+<summary>Show usage instructions</summary>
 
 `NumberPaginator` only requires the number of pages (`numberPages`) to be set. All the rest is handled by the widget automatically. Normally, one also wants to react to page changes using the `onPageChange` callback. By default, `NumberPaginator` displays page numbers as central content of the paginator.
 ```dart
