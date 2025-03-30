@@ -33,7 +33,7 @@ class NumberPaginator extends StatefulWidget {
     this.initialPage = 0,
     this.onPageChange,
     this.controller,
-    this.child = const NumberContent(),
+    this.child = const SizedBox(height: 48.0, child: NumberContent()),
   })  : assert(initialPage >= 0),
         assert(initialPage <= numberPages - 1);
 
