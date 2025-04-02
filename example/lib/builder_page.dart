@@ -38,7 +38,8 @@ class _BuilderPageState extends State<BuilderPage> {
                 Expanded(
                   child: CustomContent(
                     builder: (context, currentPage) => Center(
-                      child: Text("Currently selected page: ${currentPage + 1}"),
+                      child:
+                          Text("Currently selected page: ${currentPage + 1}"),
                     ),
                   ),
                 ),

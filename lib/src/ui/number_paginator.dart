@@ -68,7 +68,10 @@ class NumberPaginatorState extends State<NumberPaginator> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (widget.controller == null) {
+      // controller not provided from outside -> dispose it
+      _controller.dispose();
+    }
     super.dispose();
   }
 }
