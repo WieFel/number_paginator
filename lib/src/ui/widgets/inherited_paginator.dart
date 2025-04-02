@@ -28,7 +28,8 @@ class InheritedNumberPaginator extends InheritedWidget {
   });
 
   static InheritedNumberPaginator of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<InheritedNumberPaginator>();
+    final result =
+        context.dependOnInheritedWidgetOfExactType<InheritedNumberPaginator>();
     assert(result != null, "No InheritedNumberPaginator found in context");
     return result!;
   }

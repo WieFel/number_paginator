@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../inherited_paginator.dart';
 
-typedef CustomContentBuilder = Widget Function(BuildContext context, int currentPage);
+typedef CustomContentBuilder = Widget Function(
+    BuildContext context, int currentPage);
 
 class CustomContent extends StatelessWidget {
   final CustomContentBuilder builder;
