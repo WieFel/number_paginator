@@ -48,7 +48,7 @@ class _ScrollableNumberContentState extends State<ScrollableNumberContent> {
             shrinkWrap: widget.shrinkWrap,
             itemBuilder: (context, index) =>
                 widget.buttonBuilder?.call(context, index, index == currentPage) ??
-                _NumberButton(index, currentPage),
+                NumberButton(index: index, isSelected: index == currentPage),
           );
         },
       );
@@ -65,24 +65,6 @@ class _ScrollableNumberContentState extends State<ScrollableNumberContent> {
       offset,
       duration: Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-    );
-  }
-}
-
-class _NumberButton extends StatelessWidget {
-  final int index;
-  final int currentPage;
-
-  const _NumberButton(this.index, this.currentPage);
-
-  @override
-  Widget build(BuildContext context) {
-    final paginator = InheritedNumberPaginator.of(context);
-
-    return PaginatorButton(
-      onPressed: () => paginator.onPageChange?.call(index),
-      selected: index == currentPage,
-      child: Text((index + 1).toString(), maxLines: 1),
     );
   }
 }

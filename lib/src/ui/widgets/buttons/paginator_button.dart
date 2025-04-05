@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Generic paginator button that can be used for either numbers or arrows, or any other content.
 class PaginatorButton extends StatelessWidget {
   /// Callback for button press.
   final VoidCallback? onPressed;
