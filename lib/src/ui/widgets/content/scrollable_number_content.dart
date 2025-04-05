@@ -7,11 +7,13 @@ import 'number_content.dart';
 class ScrollableNumberContent extends StatefulWidget {
   final MainAxisAlignment mainAxisAlignment;
   final NumberButtonBuilder? buttonBuilder;
+  final bool shrinkWrap;
 
   const ScrollableNumberContent({
     super.key,
     this.mainAxisAlignment = MainAxisAlignment.spaceAround,
     this.buttonBuilder,
+    this.shrinkWrap = false,
   });
 
   @override
@@ -43,6 +45,7 @@ class _ScrollableNumberContentState extends State<ScrollableNumberContent> {
             controller: _scrollController,
             itemCount: numberPages,
             scrollDirection: Axis.horizontal,
+            shrinkWrap: widget.shrinkWrap,
             itemBuilder: (context, index) =>
                 widget.buttonBuilder?.call(context, index, index == currentPage) ??
                 _NumberButton(index, currentPage),
