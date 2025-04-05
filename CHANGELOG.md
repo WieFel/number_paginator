@@ -1,3 +1,7 @@
+## [1.1.0] - 05.04.2025
+
+- Add `ScrollableNumberContent` to allow for scrollable page numbers and centering of buttons
+
 ## [1.0.1] - 02.04.2025
 
 - Fix issue with "a NumberPaginatorController was used after being disposed" (issue

@@ -1,6 +1,6 @@
 name: number_paginator
 description: A Flutter paginator widget for switching between pages.
-version: 1.0.1
+version: 1.1.0
 homepage: https://github.com/WieFel/number_paginator
 
 environment:
@@ -17,11 +17,13 @@ dev_dependencies:
     sdk: flutter
 
 screenshots:
-  - description: 'First variant: hidden numbers, just arrow buttons.'
+  - description: 'Just arrow buttons'
     path: screenshots/num1.png
-  - description: 'Second variant: arrow buttons + number buttons.'
+  - description: 'Arrow buttons + number buttons'
     path: screenshots/num2.png
-  - description: 'Third variant: arrow buttons + dropdown for choosing specific page number.'
+  - description: 'Arrow buttons + scrollable number buttons'
+    path: screenshots/scrollable_numbers_centered.png
+  - description: 'Arrow buttons + dropdown for choosing specific page number'
     path: screenshots/num3.png
-  - description: 'Fourth variant: arrow buttons + build any custom view for the central part.'
+  - description: 'Arrow buttons + build any custom view for the central part'
     path: screenshots/num4.png
