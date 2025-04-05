@@ -20,18 +20,12 @@ class ScrollableNumberContent extends StatelessWidget {
 
     return ValueListenableBuilder<int>(
       valueListenable: InheritedNumberPaginator.of(context).controller,
-      builder: (context, currentPage, child) => SingleChildScrollView(
+      builder: (context, currentPage, child) => ListView.builder(
+        itemCount: numberPages,
         scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: mainAxisAlignment,
-          children: List.generate(
-            numberPages,
-            (index) {
-              return buttonBuilder?.call(context, index, index == currentPage) ??
-                  _NumberButton(index, currentPage);
-            },
-          ),
-        ),
+        itemBuilder: (context, index) =>
+            buttonBuilder?.call(context, index, index == currentPage) ??
+            _NumberButton(index, currentPage),
       ),
     );
   }
