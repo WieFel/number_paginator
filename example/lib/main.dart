@@ -1,8 +1,6 @@
-import 'package:example/builder_page.dart';
-import 'package:example/dropdown_page.dart';
-import 'package:example/numbers_page.dart';
-import 'package:example/only_arrows_page.dart';
 import 'package:flutter/material.dart';
+
+import 'pages/pages.dart';
 
 void main() => runApp(const MyApp());
 
@@ -28,15 +26,17 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text("Number Paginator"),
           bottom: const TabBar(
+            isScrollable: true,
             tabs: [
               Tab(child: Text("Arrows")),
               Tab(child: Text("Numbers")),
+              Tab(child: Text("Scrollable Numbers")),
               Tab(child: Text("Dropdown")),
               Tab(child: Text("Custom")),
             ],
@@ -46,6 +46,7 @@ class HomePage extends StatelessWidget {
           children: [
             OnlyArrowsPage(),
             NumbersPage(),
+            ScrollableNumbersPage(),
             DropdownPage(),
             BuilderPage(),
           ],
