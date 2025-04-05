@@ -198,6 +198,15 @@ NumberPaginator(
   <img alt="gif with scrollable page numbers" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/scrollable_numbers.gif" width="30%"/>
 </p>
 
+If you want the buttons to be centered, you can set `shrinkWrap: true` for `ScrollableNumberContent` like so:
+
+```dart
+ScrollableNumberContent(shrinkWrap: true)
+```
+<p align="center">
+  <img alt="centered scrollable page numbers" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/scrollable_numbers_centered.png" width="30%"/>
+</p>
+
 #### Dropdown
 The paginator shows a dropdown (material widget) for choosing which page to show, along with the prev/next buttons.
 
