@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
           title: const Text("Number Paginator"),
           bottom: const TabBar(
             isScrollable: true,
+            tabAlignment: TabAlignment.start,
             tabs: [
               Tab(child: Text("Arrows")),
               Tab(child: Text("Numbers")),
