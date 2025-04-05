@@ -9,7 +9,7 @@ class ScrollableNumbersPage extends StatefulWidget {
 }
 
 class _ScrollableNumbersPageState extends State<ScrollableNumbersPage> {
-  final int _numPages = 3;
+  final int _numPages = 10;
   int _currentPage = 0;
 
   @override
