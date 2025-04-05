@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 
-class BuilderPage extends StatefulWidget {
-  const BuilderPage({Key? key}) : super(key: key);
+class ScrollableNumbersPage extends StatefulWidget {
+  const ScrollableNumbersPage({Key? key}) : super(key: key);
 
   @override
-  _BuilderPageState createState() => _BuilderPageState();
+  _ScrollableNumbersPageState createState() => _ScrollableNumbersPageState();
 }
 
-class _BuilderPageState extends State<BuilderPage> {
+class _ScrollableNumbersPageState extends State<ScrollableNumbersPage> {
   final int _numPages = 10;
   int _currentPage = 0;
 
@@ -30,28 +30,22 @@ class _BuilderPageState extends State<BuilderPage> {
       bottomNavigationBar: Material(
         child: NumberPaginator(
           numberPages: _numPages,
-          child: SizedBox(
-            height: 48.0,
-            child: Row(
-              children: [
-                const PrevButton(),
-                Expanded(
-                  child: CustomContent(
-                    builder: (context, currentPage) => Center(
-                      child:
-                          Text("Currently selected page: ${currentPage + 1}"),
-                    ),
-                  ),
-                ),
-                const NextButton(),
-              ],
-            ),
-          ),
           onPageChange: (int index) {
             setState(() {
               _currentPage = index;
             });
           },
+          child: const SizedBox(
+            height: 48,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                PrevButton(),
+                Flexible(child: ScrollableNumberContent()),
+                NextButton(),
+              ],
+            ),
+          ),
         ),
       ),
     );

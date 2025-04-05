@@ -152,7 +152,8 @@ class _CustomButton extends StatelessWidget {
 `NumberPaginator` allows for customization of how a user can navigate between pages. It provides three different modes and an additional possibility of complete customization o the content using a `builder`.
 
 #### Numbers (default)
-The paginator shows numbers for switching to any page number that is visible.
+The paginator shows numbers for switching to any page number that is visible. If the pages don't
+fit on the screen, some of them are replaced with three dots.
 
 ```dart
 NumberPaginator(
@@ -175,6 +176,36 @@ NumberPaginator(
   <img alt="screenshot with page numbers" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/num2.png" width="30%"/>
 </p>
 
+##### Scrollable Numbers
+The page numbers can also be made scrollable. Just use `ScrollableNumberContent` for that.
+
+```dart
+NumberPaginator(
+  ...
+  child: const SizedBox(
+    height: 48,
+    child: Row(
+      children: [
+        PrevButton(),
+        Flexible(child: ScrollableNumberContent()),
+        NextButton(),
+      ],
+    ),
+  ),
+)
+```
+<p align="center">
+  <img alt="gif with scrollable page numbers" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/scrollable_numbers.gif" width="30%"/>
+</p>
+
+If you want the buttons to be centered, you can set `shrinkWrap: true` for `ScrollableNumberContent` like so:
+
+```dart
+ScrollableNumberContent(shrinkWrap: true)
+```
+<p align="center">
+  <img alt="centered scrollable page numbers" src="https://github.com/WieFel/number_paginator/raw/main/screenshots/scrollable_numbers_centered.png" width="30%"/>
+</p>
 
 #### Dropdown
 The paginator shows a dropdown (material widget) for choosing which page to show, along with the prev/next buttons.

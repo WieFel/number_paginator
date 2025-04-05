@@ -32,9 +32,7 @@ class DropDownContent extends StatelessWidget {
               child: Text(
                 (index + 1).toString(),
                 style: TextStyle(
-                  color: selected(index)
-                      ? Theme.of(context).colorScheme.secondary
-                      : null,
+                  color: selected(index) ? Theme.of(context).colorScheme.secondary : null,
                 ),
               ),
             ),
