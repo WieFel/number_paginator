@@ -41,7 +41,7 @@ class _ScrollableNumbersPageState extends State<ScrollableNumbersPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PrevButton(),
-                Flexible(child: ScrollableNumberContent()),
+                Flexible(child: ScrollableNumberContent(shrinkWrap: true)),
                 NextButton(),
               ],
             ),
