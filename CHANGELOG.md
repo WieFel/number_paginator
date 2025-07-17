@@ -1,3 +1,8 @@
+## [1.1.1] - 17.07.2025
+
+- Added property `child` to `PrevButton` and `NextButton`
+- Flutter upgrade to 3.32.6
+
 ## [1.1.0] - 05.04.2025
 
 - Add `ScrollableNumberContent` to allow for scrollable page numbers and centering of buttons
