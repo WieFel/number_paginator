@@ -4,7 +4,9 @@ import '../inherited_paginator.dart';
 import 'paginator_button.dart';
 
 class NextButton extends StatelessWidget {
-  const NextButton({super.key});
+  final Widget? child;
+
+  const NextButton({super.key, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class NextButton extends StatelessWidget {
           child: child!,
         );
       },
-      child: Icon(Icons.chevron_right),
+      child: child ?? Icon(Icons.chevron_right),
     );
   }
 }
