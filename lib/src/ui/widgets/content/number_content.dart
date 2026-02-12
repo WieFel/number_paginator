@@ -32,13 +32,17 @@ class NumberContent extends StatelessWidget {
           valueListenable: InheritedNumberPaginator.of(context).controller,
           builder: (context, currentPage, child) => Row(
             mainAxisAlignment: mainAxisAlignment,
-            children: [
-              _buildPageButton(context, currentPage, 0),
-              if (_frontDotsShouldShow(numberPages, currentPage, availableSpots)) _Dots(),
-              if (numberPages > 1) ..._generateButtonList(context, currentPage, availableSpots),
-              if (_backDotsShouldShow(numberPages, currentPage, availableSpots)) _Dots(),
-              if (numberPages > 1) _buildPageButton(context, currentPage, numberPages - 1),
-            ],
+            children: (availableSpots >= 3)
+                ? [
+                    _buildPageButton(context, currentPage, 0),
+                    if (_frontDotsShouldShow(numberPages, currentPage, availableSpots)) _Dots(),
+                    if (numberPages > 1) ..._generateButtonList(context, currentPage, availableSpots),
+                    if (_backDotsShouldShow(numberPages, currentPage, availableSpots)) _Dots(),
+                    if (numberPages > 1) _buildPageButton(context, currentPage, numberPages - 1),
+                  ]
+                : [
+                    _buildPageButton(context, currentPage, currentPage),
+                  ],
           ),
         );
       },
@@ -49,18 +53,31 @@ class NumberContent extends StatelessWidget {
   /// dots. The very last and first pages are shown independently of this list.
   List<Widget> _generateButtonList(BuildContext context, int currentPage, int availableSpots) {
     final numberPages = InheritedNumberPaginator.of(context).numberPages;
+
     // if dots shown: available minus (2 for first and last pages + 2 for dots)
-    final shownPages = availableSpots -
-        2 -
-        (_backDotsShouldShow(numberPages, currentPage, availableSpots) ? 1 : 0) -
-        (_frontDotsShouldShow(numberPages, currentPage, availableSpots) ? 1 : 0);
+    final backDotsShow = _backDotsShouldShow(numberPages, currentPage, availableSpots);
+    final frontDotsShow = _frontDotsShouldShow(numberPages, currentPage, availableSpots);
+
+    final shownPagesCalc = availableSpots - 2 - (backDotsShow ? 1 : 0) - (frontDotsShow ? 1 : 0);
+    final shownPages = max(0, shownPagesCalc);
+
+    if (shownPages == 0) {
+      return [];
+    }
 
     var minValue = max(1, currentPage - shownPages ~/ 2);
-    final maxValue = min(minValue + shownPages, numberPages - 1);
+
+    var maxValue = min(minValue + shownPages, numberPages - 1);
+
+    // Ensure we show the requested number of pages if possible
     if (maxValue - minValue < shownPages) {
       minValue = (maxValue - shownPages).clamp(1, numberPages - 1);
     }
 
+    // Final safety check: ensure min is never greater than max
+    if (minValue > maxValue) {
+      return [];
+    }
     return List.generate(
       maxValue - minValue,
       (index) => _buildPageButton(context, currentPage, minValue + index),
