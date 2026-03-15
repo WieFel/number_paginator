@@ -1,3 +1,10 @@
+## [1.1.2] - 15.03.2026
+
+- Fix argument error for small widths (issue
+  [#38](https://github.com/WieFel/number_paginator/issues/38))
+- Flutter upgrade to 3.41.2
+- Improvements and upgrades
+
 ## [1.1.1] - 17.07.2025
 
 - Added property `child` to `PrevButton` and `NextButton`

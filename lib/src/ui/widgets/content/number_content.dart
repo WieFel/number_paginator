@@ -36,7 +36,8 @@ class NumberContent extends StatelessWidget {
                 ? [
                     _buildPageButton(context, currentPage, 0),
                     if (_frontDotsShouldShow(numberPages, currentPage, availableSpots)) _Dots(),
-                    if (numberPages > 1) ..._generateButtonList(context, currentPage, availableSpots),
+                    if (numberPages > 1)
+                      ..._generateButtonList(context, currentPage, availableSpots),
                     if (_backDotsShouldShow(numberPages, currentPage, availableSpots)) _Dots(),
                     if (numberPages > 1) _buildPageButton(context, currentPage, numberPages - 1),
                   ]
